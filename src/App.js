@@ -13,7 +13,7 @@ import {products} from '../src/data';
 // const {REACT_APP_URL_KEY} = process.env.REACT_APP_URL_KEY;
 
 function App() {
-  const [usedata, setusedata] = useState([products]);
+  const [usedata, setusedata] = useState(products);
   // useEffect(() => {
   //   axios.get("http://localhost:3000/products")
   //   .then(res => {
@@ -24,7 +24,7 @@ function App() {
   //   })
     
   // }, [])
-
+  console.log(usedata)
   return (
     <BrowserRouter>
     <Routes>
@@ -34,7 +34,7 @@ function App() {
           <Route path="products/:categoryLabel/:shopby/:viewby" element={<SideFilter usedata={usedata} />}>
             <Route index element={<Products usedata={usedata}/>} />
           </Route>
-          <Route path="products/:categoryLabel/:shopby/:viewby/:itemid/:itemname" element={<SingleProduct usedata={usedata}/>} />
+          <Route path="products/:categoryLabel/:shopby/:viewby/:itemid/:itemname" element={<SingleProduct usedata={products}/>} />
           <Route path="*" element={<Error />}/>
         </Route>
       </Routes>
