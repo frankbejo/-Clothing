@@ -15,7 +15,7 @@ const Navbar = () => {
 
     const [theme, setTheme] = useState(true);
     const [logo, setLogo] = useState(true);
-// droponhover state
+    // droponhover state
     const [droponhover, setdroponhover ] = useState(false)
 
      // category state for navbar
@@ -87,17 +87,17 @@ const Navbar = () => {
                             </div>
                             <div className="menus">
                                 <ul className="menu-list">
-                                    <li className={`tohover ${usecategory === "men" && droponhover === true ? "on-hover":""}`} onClick={() => GetCategories("men")} onMouseOver={() => GetCategories("men")} onMouseOut = {() => setdroponhover(false)}>
-                                        <span className={categoryLabel === "men" ? "active-menu":""}>Men</span>
+                                    <li className={`tohover ${usecategory === "men" && droponhover === true ? "on-hover":""}`} >
+                                        <span className={categoryLabel === "men" ? "active-menu":""} onMouseOver={() => GetCategories("men")} onClick={() => GetCategories("men")} onMouseOut = {() => setdroponhover(false)} >Men</span>
                                     </li>
-                                    <li className={`tohover ${usecategory === "women" && droponhover === true ? "on-hover":""}`} onClick={() => GetCategories("women")} onMouseOver={() => GetCategories("women")} onMouseOut = {() => setdroponhover(false)}>
-                                        <span className={categoryLabel === "women" ? "active-menu":""}>Women</span>
+                                    <li className={`tohover ${usecategory === "women" && droponhover === true ? "on-hover":""}`}>
+                                        <span className={categoryLabel === "women" ? "active-menu":""} onMouseOver={() => GetCategories("women")} onClick={() => GetCategories("women")} onMouseOut = {() => setdroponhover(false)}>Women</span>
                                     </li>
-                                    <li className={`tohover ${usecategory === "divided" && droponhover === true ? "on-hover":""}`} onClick={() => GetCategories("divided")} onMouseOver={() => GetCategories("divided")} onMouseOut = {() => setdroponhover(false)}>
-                                        <span className={categoryLabel === "divided" ? "active-menu":""}>Divided</span>
+                                    <li className={`tohover ${usecategory === "divided" && droponhover === true ? "on-hover":""}`}>
+                                        <span className={categoryLabel === "divided" ? "active-menu":""} onMouseOver={() => GetCategories("divided")} onClick={() => GetCategories("divided")} onMouseOut = {() => setdroponhover(false)}>Divided</span>
                                     </li>
-                                    <li className={`tohover ${usecategory === "kids" && droponhover === true ? "on-hover":""}`} onClick={() => GetCategories("kids")} onMouseOver={() => GetCategories("kids")} onMouseOut = {() => setdroponhover(false)}>
-                                        <span className={categoryLabel === "kids" ? "active-menu":""}>Kids</span>
+                                    <li className={`tohover ${usecategory === "kids" && droponhover === true ? "on-hover":""}`}>
+                                        <span className={categoryLabel === "kids" ? "active-menu":""} onMouseOver={() => GetCategories("kids")} onClick={() => GetCategories("kids")} onMouseOut = {() => setdroponhover(false)}>Kids</span>
                                     </li>
                                     <li>
                                         <NavLink to="/about" classname={(isActive) => { return isActive ? "active" : ""} } >About</NavLink>
@@ -110,7 +110,7 @@ const Navbar = () => {
                         </div>
                     </nav>
                         <div className={`dropdownhover ${droponhover ? "show":"hide"}`} onMouseOver={() => setdroponhover(true)} onMouseLeave = {() => setdroponhover(false)}>
-                            <div className="top-menus">
+                            <div className="top-menus"> 
                                 <ul className="newarrival">
                                     <span>New Arrival</span>
                                     <li onClick={() => setdroponhover(false)}>
