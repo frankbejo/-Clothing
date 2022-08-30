@@ -210,7 +210,12 @@ export const StyledNavbar = styled.div`
 
     .botnav .menus .menu-list li{
         padding: 5px;
+        padding-bottom: 0px;
         cursor: pointer;
+    }
+
+    .menu-list li span{
+        padding-bottom: 5px;
     }
     
     .menu-list .tohover{
@@ -227,6 +232,7 @@ export const StyledNavbar = styled.div`
         bottom: 0;
         transform: rotate(-40deg);
         margin-left: 5px;
+        pointer-events: none;
         background-color: ${(props) => props.theme.fontColor};
     }
 
@@ -238,6 +244,7 @@ export const StyledNavbar = styled.div`
         bottom: 0;
         transform: rotate(40deg);
         margin-left: -5px;
+        pointer-events: none;
         background-color: ${(props) => props.theme.fontColor};
     }
 
@@ -253,6 +260,7 @@ export const StyledNavbar = styled.div`
         height: auto;
         width: 100%;
         padding: 20px;
+        margin-top: -100px;
         background-color: ${(props) => props.theme.body};
         color: ${(props) => props.theme.fontColor};
         border-bottom: 1px solid black;
@@ -395,7 +403,7 @@ export const StyledProducts = styled.div`
 
     .products-container{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 500px);
         width: 100%;
         grid-gap: 5px;
         }
