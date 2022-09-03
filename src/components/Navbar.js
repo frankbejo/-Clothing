@@ -114,22 +114,22 @@ const Navbar = () => {
                                 <ul className="newarrival">
                                     <span>New Arrival</span>
                                     <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/newarrival/viewall`} className={(isActive) => {return isActive ? "active":""}}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/newarrival/viewall`} 
+                                                classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
                                     </li>
-                                    {
-                                        
-                                    }
                                 </ul>
                                 <ul className="trendingnew">
                                     <span>Trending Now</span>
                                     <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/trending/viewall`}
+                                        classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
                                     </li>
                                 </ul>
                                 <ul className="byproducts">
                                     <span>Shop by Products</span>
                                     <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/all/viewall`}
+                                        classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
                                     </li>
                                 </ul>
                             </div>

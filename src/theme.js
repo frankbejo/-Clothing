@@ -255,6 +255,10 @@ export const StyledNavbar = styled.div`
     .menu-list .active{
         font-weight: bold;
     }
+
+    .top-menus .active{
+        font-weight: bold;
+    }
     .dropdownhover{
         position: absolute;
         height: auto;
@@ -263,7 +267,7 @@ export const StyledNavbar = styled.div`
         margin-top: -100px;
         background-color: ${(props) => props.theme.body};
         color: ${(props) => props.theme.fontColor};
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid ${(props) => props.theme.fontColor};;
         z-index: 10;
         user-select: none;
         transition: 300ms ease-in-out;
@@ -304,10 +308,6 @@ export const StyledNavbar = styled.div`
 
 
 export const StyledItem = styled.div`
-    font-size: 1em;
-    width: 100%;
-    height: 100%;
-
     .item{
         background-color: ${(props) => props.theme.itembg};
         color: ${(props) => props.theme.fontColor};
@@ -322,22 +322,20 @@ export const StyledItem = styled.div`
         display: flex;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        justify-content: center;
+        
     }
 
     .cover img{
         max-width: 100%;
-        height: auto;
+        height: 100%;
     }
 
     .lower-info{
         margin-top: 0;
         background-color: ${(props) => props.theme.itembg};
-        color: ${(props) => props.theme.body};
         padding: 5px;
-        width: 100%;
         height: 100%;
+        width: 100%;
         overflow: hidden;
     }
 `;
@@ -371,7 +369,7 @@ export const StyledProducts = styled.div`
         padding: 10px;
         position: sticky;
         top: 0;   
-        width: 232px;
+        min-width: 170px;
         height: 100%;
         background-color: ${props => props.theme.itembg};
         border: 1px solid ${props => props.theme.fontColor};
@@ -533,9 +531,13 @@ export const StyledProducts = styled.div`
                 grid-template-columns: repeat(3, 1fr);
             }
 
+            .cover{
+                width: calc(100vw / 4);
+                height: calc(100vw / 2.5);
+            }
         }
 
-        @media screen and (max-width: 760px ) {
+        @media screen and (max-width: 768px ) {
 
             .side-nav{
                 display: none;
@@ -544,11 +546,18 @@ export const StyledProducts = styled.div`
             .products-container{
                 grid-template-columns: repeat(3, 1fr);
             }
+
+            .cover{
+                height: calc(100vw / 2.1);
+            }
         }
 
         @media screen and (max-width: 600px ) {
             .products-container{
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .cover{
+                height: calc(100vw / 1.45);
             }
         }
 
@@ -559,11 +568,8 @@ export const StyledProducts = styled.div`
             .products-container{
                 grid-template-columns: repeat(2, 1fr);
             }
-        }
-
-        @media screen and (max-width: 320px ) {
-            .products-container{
-                grid-template-columns: repeat(2, 1fr);
+            .cover{
+                height: calc(100vw / 1.5);
             }
         }
 
