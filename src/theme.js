@@ -23,7 +23,6 @@ export const Globalstyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 body{
@@ -190,8 +189,9 @@ export const StyledNavbar = styled.div`
     }
 
     .botnav .brand-logo a img{
-        height: 105px;
+        height: 86px;
         width: 86px;
+        margin-bottom: 10px;
     }
 
     .botnav .menus{

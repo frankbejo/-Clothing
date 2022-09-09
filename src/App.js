@@ -24,7 +24,7 @@ function App() {
   //   })
     
   // }, [])
-  console.log(usedata)
+
   return (
     <BrowserRouter>
     <Routes>
