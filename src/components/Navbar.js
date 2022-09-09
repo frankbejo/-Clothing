@@ -78,7 +78,7 @@ const Navbar = () => {
                         <div className="botnav">
                             <div className="brand-logo">
                                 <NavLink to="/">
-                                    <img src={logo ? logo1 : logo2} alt="" aria-label="Home" />
+                                    <img src={theme ? logo1 : logo2} alt="" aria-label="Home" />
                                 </NavLink>
                             </div>
                             <div className="menus">
