@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef} from "react";
 import { useParams } from "react-router-dom"
 import FilterThis from "./FilterThis";
 import { Item } from './Item';
-import {Search} from '@mui/icons-material';
 // import axios from 'axios';
 import {products} from '../data'
 
@@ -10,7 +9,7 @@ export const Products = () => {
     const [passeddata, setpasseddata] = useState([]);
     const [searchdata, setsearchdata] = useState(null);
     const [filterdata, setfilterdata] = useState([]);
-    const { categoryLabel, shopby, viewby } = useParams();
+    const { categoryLabel, shopby} = useParams();
     const searchinput = useRef(null);
 
     // const GetThisData = async () => {
@@ -53,8 +52,14 @@ export const Products = () => {
 
     // filter search
     const thisdata = filterdata.filter(items => 
-        items.itemname.toLowerCase().includes(searchdata)
+        items.itemname.includes(searchdata) || items.itemname.toLowerCase().includes(searchdata) || items.itemname.toUpperCase().includes(searchdata)
     )
+
+    const Search = (e) => {
+        if(e.key === "Enter"){
+            FilterData(e.target.value)
+        }
+    }
 
     const FilterData = (text) => {
         setsearchdata(text)
@@ -69,7 +74,6 @@ export const Products = () => {
         searchinput.current.value = null;
         FilterData("")
         FilterByShop()
-        console.log(filterCategory)
     }, [categoryLabel,shopby, passeddata])
 
     
@@ -87,7 +91,7 @@ export const Products = () => {
 
                                 <div className="search">
                                     <Search />
-                                    <input type="search" name="search" id="search" placeholder='Search' autoComplete='off' onChange={ (e) => FilterData(e.target.value)} ref={searchinput} />
+                                    <input type="search" name="search" id="search" placeholder='Search' autoComplete='off' onKeyPress={Search} ref={searchinput} />
                                 </div>
                             </div>
                             
@@ -110,8 +114,8 @@ export const Products = () => {
                                     (
                                         <div className="products-container" >{
                                             thisdata.filter(items => items.category === categoryLabel)
-                                        .map(item => {
-                                        return <Item {...item}/>
+                                            .map((item, index) => {
+                                            return <Item {...item} key={index}/>
                                         })
                                         }
                                         </div>

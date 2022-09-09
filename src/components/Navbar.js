@@ -44,30 +44,26 @@ const Navbar = () => {
                                 <NavLink to='/customerservice'>Customer Service</NavLink>
                             </div>
                             
-                        <div className="right-topnav">
-                            <div className="canvas" onClick={themeToggle}>
-                                <Brightness4 />
-                                <Brightness7 />
+                            
+
+                            <div className="right-topnav">
+                                <NavLink to="/Sign in"> 
+                                    <div className="account">
+                                    <AccountCircleOutlined />Sign in
+                                    </div> 
+                                </NavLink>
+
+                                <div className="canvas" onClick={themeToggle}>
+                                    <Brightness4 />
+                                    <Brightness7 />
+                                </div>
                             </div>
-                            
-                            <NavLink to="/Sign in"> 
-                                <div className="account">
-                                <AccountCircleOutlined />Sign in
-                                </div> </NavLink>
-                            
-                        </div>
                         </div>
 
                         <div className="centernav">
                             <div className="left-centernav">
-                                <li>
-                                    
                                     <NavLink to='/newsletter'>Newsletter</NavLink>
-                                    
-                                </li>
-                                <li>
                                     <NavLink to='/findastore'>Find a store</NavLink>
-                                </li>
                             </div>
                             <div className="right-centernav">
                                 <div id="favorites">
@@ -82,7 +78,7 @@ const Navbar = () => {
                         <div className="botnav">
                             <div className="brand-logo">
                                 <NavLink to="/">
-                                    <img src={logo ? logo1 : logo2} alt="" />
+                                    <img src={logo ? logo1 : logo2} alt="" aria-label="Home" />
                                 </NavLink>
                             </div>
                             <div className="menus">
@@ -100,10 +96,10 @@ const Navbar = () => {
                                         <span className={categoryLabel === "kids" ? "active-menu":""} onMouseOver={() => GetCategories("kids")} onClick={() => GetCategories("kids")} onMouseOut = {() => setdroponhover(false)}>Kids</span>
                                     </li>
                                     <li>
-                                        <NavLink to="/about" classname={(isActive) => { return isActive ? "active" : ""} } >About</NavLink>
+                                        <NavLink to="/about" >About</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/Sustainability" classname={(isActive) => { return isActive ? "active" : ""} }>Sustainability</NavLink>
+                                        <NavLink to="/Sustainability">Sustainability</NavLink>
                                     </li>
                                 </ul>
                             </div>
@@ -111,25 +107,23 @@ const Navbar = () => {
                     </nav>
                         <div className={`dropdownhover ${droponhover ? "show":"hide"}`} onMouseOver={() => setdroponhover(true)} onMouseLeave = {() => setdroponhover(false)}>
                             <div className="top-menus"> 
+                                    
                                 <ul className="newarrival">
-                                    <span>New Arrival</span>
+                                    <li><span>New Arrival</span></li>
                                     <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/newarrival/viewall`} 
-                                                classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/newarrival/viewall`} >View All</NavLink>
                                     </li>
                                 </ul>
                                 <ul className="trendingnew">
-                                    <span>Trending Now</span>
+                                    <li><span>Trending Now</span></li>
                                     <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/trending/viewall`}
-                                        classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
                                     </li>
                                 </ul>
                                 <ul className="byproducts">
-                                    <span>Shop by Products</span>
+                                    <li><span>Shop by Products</span></li>
                                     <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/all/viewall`}
-                                        classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
                                     </li>
                                 </ul>
                             </div>

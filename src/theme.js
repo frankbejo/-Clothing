@@ -191,7 +191,7 @@ export const StyledNavbar = styled.div`
 
     .botnav .brand-logo a img{
         height: 105px;
-        width: auto;
+        width: 86px;
     }
 
     .botnav .menus{
@@ -319,15 +319,15 @@ export const StyledItem = styled.div`
     }
 
     .cover{
-        display: flex;
+        aspect-ratio: 2 / 3;
         width: 100%;
         height: 100%;
-        
     }
 
     .cover img{
-        max-width: 100%;
+        width: 100%;
         height: 100%;
+        object-fit: cover;
     }
 
     .lower-info{
@@ -401,8 +401,9 @@ export const StyledProducts = styled.div`
 
     .products-container{
         display: grid;
-        grid-template-columns: repeat(5, 500px);
+        grid-template-columns: repeat(15, 1fr);
         width: 100%;
+        height: 100%;
         grid-gap: 5px;
         }
 
@@ -461,6 +462,7 @@ export const StyledProducts = styled.div`
         justify-content: space-between;
         align-items: center;
         top: 0;
+        height: 46px;
         padding:10px;
         margin-bottom: 5px;
         color: ${props => props.theme.fontColor};
@@ -491,6 +493,7 @@ export const StyledProducts = styled.div`
     .filter-function{
         display: flex;
         gap: 20px;
+        overflow: hidden;
     }
 
     
@@ -530,46 +533,42 @@ export const StyledProducts = styled.div`
             .products-container{
                 grid-template-columns: repeat(3, 1fr);
             }
-
-            .cover{
-                width: calc(100vw / 4);
-                height: calc(100vw / 2.5);
-            }
+            
         }
 
-        @media screen and (max-width: 768px ) {
-
-            .side-nav{
-                display: none;
-            }
-            
+        @media screen and (max-width: 768px ) {   
             .products-container{
                 grid-template-columns: repeat(3, 1fr);
             }
-
-            .cover{
-                height: calc(100vw / 2.1);
-            }
         }
 
-        @media screen and (max-width: 600px ) {
+        @media screen and (max-width: 635px ) {
             .products-container{
                 grid-template-columns: repeat(2, 1fr);
             }
-            .cover{
-                height: calc(100vw / 1.45);
-            }
-        }
 
-        @media screen and (max-width: 425px ) {
             .side-nav{
                 display: none;
             }
+
+        }
+
+        @media screen and (max-width: 425px ) {
             .products-container{
                 grid-template-columns: repeat(2, 1fr);
             }
-            .cover{
-                height: calc(100vw / 1.5);
+
+        }
+
+        @media screen and (max-width: 375px ) {
+            .products-container{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 320px ) {
+            .products-container{
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -600,7 +599,6 @@ export const StyledSingleProduct = styled.div`
     }
     
     .cover{
-        display: flex;
         gap: 10px;
         flex-direction: row;
         height: auto;
@@ -612,6 +610,7 @@ export const StyledSingleProduct = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        background-size: contain;
         border: 1px solid ${(props) => props.theme.fontColor};
     }
 

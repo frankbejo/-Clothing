@@ -14,10 +14,10 @@ const SideFilter = () => {
                                 <span className="side-filter-header">New Arrival</span>
                                 <ul className="side-filter-items">
                                     <li>
-                                        <NavLink to={`/products/${categoryLabel}/newarrival/viewall`}classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
+                                        <NavLink to={`/products/${categoryLabel}/newarrival/viewall`}>View All</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={`/products/${categoryLabel}/newarrival/linenclothing`} classname={(isActive) => { return isActive ? "active" : ""}}>Linen Clothing</NavLink>
+                                        <NavLink to={`/products/${categoryLabel}/newarrival/linenclothing`}>Linen Clothing</NavLink>
                                     </li>
                                 </ul>
                             </li>
@@ -26,7 +26,7 @@ const SideFilter = () => {
                                 <span className="side-filter-header">Trending Now</span>
                                 <ul className="side-filter-items">
                                     <li>
-                                        <NavLink to={`/products/${categoryLabel}/trending/viewall`} classname={(isActive) => { return isActive ? "active" : ""}}>View All</NavLink>
+                                        <NavLink to={`/products/${categoryLabel}/trending/viewall`}>View All</NavLink>
                                     </li>
                                 </ul>
                             </li>
