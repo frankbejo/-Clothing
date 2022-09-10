@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {NavLink, Outlet, useParams} from 'react-router-dom';
 import logo1 from '../images/logo_2.png';
-import logo2 from '../images/logo_3.png';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, Brightness4, Brightness7, AccountCircleOutlined} from '@mui/icons-material';
@@ -9,12 +8,10 @@ import { ShoppingBagOutlined, FavoriteBorder, Brightness4, Brightness7, AccountC
 const Navbar = () => {
     // useParams
     const params = useParams();
-    const {categoryLabel, shopby, viewby} = params;
+    const {categoryLabel} = params;
 
     // states
-
     const [theme, setTheme] = useState(true);
-    const [logo, setLogo] = useState(true);
     // droponhover state
     const [droponhover, setdroponhover ] = useState(false)
 
@@ -29,7 +26,6 @@ const Navbar = () => {
 
     const themeToggle = () => {
         setTheme(!theme)
-        setLogo(!logo)
     }
 
     return(
@@ -47,16 +43,18 @@ const Navbar = () => {
                             
 
                             <div className="right-topnav">
+                                <div className="canvas" onClick={themeToggle}>
+                                    <Brightness4 />
+                                    <Brightness7 />
+                                </div>
+
                                 <NavLink to="/Sign in"> 
                                     <div className="account">
                                     <AccountCircleOutlined />Sign in
                                     </div> 
                                 </NavLink>
 
-                                <div className="canvas" onClick={themeToggle}>
-                                    <Brightness4 />
-                                    <Brightness7 />
-                                </div>
+                                
                             </div>
                         </div>
 
@@ -78,7 +76,7 @@ const Navbar = () => {
                         <div className="botnav">
                             <div className="brand-logo">
                                 <NavLink to="/">
-                                    <img src={theme ? logo1 : logo2} alt="" aria-label="Home" />
+                                    <img src={logo1} alt="" className={theme ? "light-mode": "dark-mode"} aria-label="Home" />
                                 </NavLink>
                             </div>
                             <div className="menus">
