@@ -194,6 +194,10 @@ export const StyledNavbar = styled.div`
         margin-bottom: 10px;
     }
 
+    .botnav .brand-logo a img.dark-mode{
+        filter: invert();
+    }
+
     .botnav .menus{
         display: flex;
         align-items: center;
