@@ -1,12 +1,10 @@
-import { NavLink, Outlet, useParams } from "react-router-dom";
-import { StyledProducts } from '../theme';
+import { NavLink, useParams } from "react-router-dom";
 
-const SideFilter = () => {
+export const SideFilter = () => {
     const params = useParams();
     const {categoryLabel} = params;
+    
     return(
-        <StyledProducts>
-            <section className="products">
                 <div className="side-nav">
                     <div className="side-nav-fixed">
                         <ul className="side-filter">
@@ -42,12 +40,6 @@ const SideFilter = () => {
                         </ul>
                     </div>
                 </div>
-                <Outlet />
-            </section>
-            
-        </StyledProducts>
         
     )
 }
-
-export default SideFilter;

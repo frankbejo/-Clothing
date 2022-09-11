@@ -29,9 +29,8 @@ body{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
     background-color: ${(props) => props.theme.body};
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', serif;
 }
 
 section{
@@ -58,6 +57,13 @@ section span{
 }
 `;
 
+export const StyledSearched = styled.div`
+    
+`
+
+export const StyledCustomerService = styled.div`
+`;
+
 export const HomeStyled = styled.div`
 section{
     display: flex;
@@ -72,7 +78,6 @@ section{
 .image-container img{
     width: 100%;
     height: auto;
-    border: 1px solid ${props => props.theme.fontColor};
 
 }
 `;
@@ -107,7 +112,7 @@ export const StyledNavbar = styled.div`
         display:flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px;
+        padding: 10px 20px;
         padding-bottom: 5px;
         
     }
@@ -127,21 +132,22 @@ export const StyledNavbar = styled.div`
     .right-topnav .canvas{
         display: flex;
         justify-content: center;
-        height: 19px;
-        width: 40px;
-        border-radius: 20px;
         align-items: center;
+        height: 19px;
+        width: 39px;
+        border-radius: 20px;
         padding: 0;
-        border-width: 1px;
-        border-style: solid;
-        border-color: ${(props) => props.theme.fontColor};
         transition: 200ms ease-in-out;
         cursor: pointer;
         overflow: hidden;
+        border: 2px solid ${props => props.theme.fontColor};
     }
 
     .right-topnav .canvas svg{
-        height: 24px;
+        height: 16px;
+        height: 16px;
+        margin-left: -2px;
+        margin-right: -2px;
         transition: 50ms ease-in-out;
     }
 
@@ -191,17 +197,15 @@ export const StyledNavbar = styled.div`
     .botnav .brand-logo a img{
         height: 86px;
         width: 86px;
-        margin-bottom: 10px;
     }
 
-    .botnav .brand-logo a img.dark-mode{
+    img.dark-mode{
         filter: invert();
     }
 
     .botnav .menus{
         display: flex;
         align-items: center;
-        margin-top: -30px;
     }
     
     .botnav .menus .menu-list{
@@ -308,14 +312,91 @@ export const StyledNavbar = styled.div`
     .top-menus ul li{
         display: flex;
     }
-`;
 
+    .menu-show{
+        display: none;
+    }
+
+    .menu-show a img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .search{
+        position: absolute;
+        left: 20px;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0 3px;
+        color: ${(props) => props.theme.fontColor};
+        overflow: hidden;
+        border-bottom: 1px solid ${(props) => props.theme.fontColor};
+    }
+
+    .search input{
+        width: 100px;
+        height: 100%;
+        outline: none;
+        background-color: ${(props) => props.theme.body};
+        color: ${(props) => props.theme.fontColor};
+        border: none;
+    }
+
+    @media screen and (max-width: 768px){
+        .botnav{
+            display: none;
+        }
+
+        .botnav{
+            margin-top: -20px;
+            padding-bottom: 20px;
+        }
+
+        #shopping #favorites, span{
+            display: none;
+        }
+
+        .right-topnav{
+            gap: 0;
+        }
+
+        .right-topnav .account{
+            display: none;
+        }
+
+        .left-topnav > a{
+            display: none;
+        }
+
+        .left-centernav a{
+            display: none;
+        }
+        
+
+        .menu-show{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .centernav{
+            height: 30px;
+        }
+
+        .search{
+            position: static;
+        }
+    }
+`;
 
 export const StyledItem = styled.div`
     .item{
         background-color: ${(props) => props.theme.itembg};
+        border: 1px solid ${props => props.theme.fontColor};
         color: ${(props) => props.theme.fontColor};
-        border: 1px solid ${(props) => props.theme.fontColor};
+        overflow: hidden;
     }
 
     a{
@@ -339,8 +420,10 @@ export const StyledItem = styled.div`
         background-color: ${(props) => props.theme.itembg};
         padding: 5px;
         height: 100%;
-        width: 100%;
+        width: 120px; 
+        white-space: nowrap;
         overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 
@@ -353,14 +436,25 @@ export const StyledProducts = styled.div`
     }
 
     .products{
-        display: flex;  
-        gap: 5px;
-
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
     
     span{
         font-size: 13px;
     }
+
+    .main-container{
+        display: flex;
+        gap: 5px;
+    }
+
+    .breadcrumbs{
+        display: flex;  
+        justify-content: center;
+    }
+
     .side-main-container{
         width: 100%;
         display: flex;
@@ -376,8 +470,8 @@ export const StyledProducts = styled.div`
         min-width: 170px;
         height: 100%;
         background-color: ${props => props.theme.itembg};
-        border: 1px solid ${props => props.theme.fontColor};
         z-index: 0;
+        border: 1px solid ${props => props.theme.fontColor};
     }
 
     .side-nav .side-filter, .side-filter-items{
@@ -475,61 +569,39 @@ export const StyledProducts = styled.div`
         z-index: 1;
     }
 
-    .search{
-        display: flex;
-        align-items: center;
-        right: 20px;
-        padding: 0 5px;
-        gap: 5px;
-        color: ${(props) => props.theme.fontColor};
-        transition: 300ms ease-in-out;
-        overflow: hidden;
-    }
-
-    .search input{
-        width: 100%;
-        outline: none;
-        background-color: ${(props) => props.theme.body};
-        color: ${(props) => props.theme.fontColor};
-        border: none;
-    }
-
     .filter-function{
         display: flex;
         gap: 20px;
         overflow: hidden;
     }
-
-    
-
     /* media quiries------------------------------------------------------- */
         @media screen and (max-width: 2870px ) {
-            .products-container{
-                grid-template-columns: repeat(8, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 2560px ) {
             .products-container{
                 grid-template-columns: repeat(6, 1fr);
             }
         }
 
-        @media screen and (max-width: 2040px ) {
+        @media screen and (max-width: 2560px ) {
             .products-container{
                 grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 2040px ) {
+            .products-container{
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
         @media screen and (max-width: 1440px ) {
             .products-container{
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
         @media screen and (max-width: 1244px ) {
             .products-container{
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -544,27 +616,26 @@ export const StyledProducts = styled.div`
             .products-container{
                 grid-template-columns: repeat(3, 1fr);
             }
-        }
-
-        @media screen and (max-width: 635px ) {
-            .products-container{
-                grid-template-columns: repeat(2, 1fr);
-            }
 
             .side-nav{
                 display: none;
             }
-
         }
 
-        @media screen and (max-width: 425px ) {
+        @media screen and (max-width: 635px ) {
             .products-container{
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 420px ) {
+            .products-container{
+                grid-template-columns: repeat(3, 1fr);
             }
 
         }
 
-        @media screen and (max-width: 375px ) {
+        @media screen and (max-width: 400px ) {
             .products-container{
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -615,7 +686,6 @@ export const StyledSingleProduct = styled.div`
         height: 100%;
         object-fit: cover;
         background-size: contain;
-        border: 1px solid ${(props) => props.theme.fontColor};
     }
 
     .info{
@@ -630,7 +700,6 @@ export const StyledSingleProduct = styled.div`
         justify-content: space-between;
         padding: 20px;
         background-color: ${(props) => props.theme.itembg};
-        border: 1px solid ${(props) => props.theme.fontColor};
         color: ${(props) => props.theme.fontColor};
         position: sticky;
         top: 0;

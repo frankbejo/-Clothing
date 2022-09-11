@@ -176,7 +176,7 @@ export const products =
         ],
         category: "women",
         isHot: false,
-        itemname: "Denim Jacket",
+        itemname: "Denim Jacket with washing machine and ricecooker",
         image: [
             "https://images.unsplash.com/photo-1578681994506-b8f463449011?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNsb3RoaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
             "https://images.unsplash.com/photo-1640037002750-31a913cd05c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDI3fFM0TUtMQXNCQjc0fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
