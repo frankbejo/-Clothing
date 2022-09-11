@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Error } from "./components/Error";
-import { Home } from "./components/Home";
-import { CustomerService } from "./components/CustomerService";
-import {Products} from './components/Products';
-import { SingleProduct } from "./components/SingelProduct";
+import { Error } from "./pages/Error";
+import { Home } from "./pages/Home";
+import { CustomerService } from "./pages/CustomerService";
+import {Products} from './pages/Products';
+import { SingleProduct } from "./pages/SingelProduct";
 import Navbar from "./components/Navbar";
 // import axios from "axios";
-import SideFilter from "./components/SideFilter";
 import {products} from '../src/data';
+import { SearchedPage } from "./pages/SearchedPage";
 
 // const {REACT_APP_URL_KEY} = process.env.REACT_APP_URL_KEY;
 
@@ -30,10 +30,9 @@ function App() {
     <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
+          <Route path="search" element={<SearchedPage />} />
           <Route path="customerservice" element={<CustomerService />} />
-          <Route path="products/:categoryLabel/:shopby/:viewby" element={<SideFilter usedata={usedata} />}>
-            <Route index element={<Products usedata={usedata}/>} />
-          </Route>
+          <Route path="products/:categoryLabel/:shopby/:viewby" element={<Products usedata={usedata}/>} />
           <Route path="products/:categoryLabel/:shopby/:viewby/:itemid/:itemname" element={<SingleProduct usedata={products}/>} />
           <Route path="*" element={<Error />}/>
         </Route>

@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {NavLink, Outlet, useParams} from 'react-router-dom';
 import logo1 from '../images/logo_2.png';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
-import { ShoppingBagOutlined, FavoriteBorder, Brightness4, Brightness7, AccountCircleOutlined} from '@mui/icons-material';
+import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search} from '@mui/icons-material';
 
 const Navbar = () => {
     // useParams
     const params = useParams();
     const {categoryLabel} = params;
+
+    //useRef
+    const searchFunc = useRef()
 
     // states
     const [theme, setTheme] = useState(true);
@@ -38,19 +41,26 @@ const Navbar = () => {
 
                             <div className="left-topnav">
                                 <NavLink to='/customerservice'>Customer Service</NavLink>
+                                <div className="menu-show">
+                                    <Menu />
+                                <NavLink to="/">
+                                    <img src={logo1} alt="" className={theme ? "light-mode": "dark-mode"} aria-label="Home" />
+                                </NavLink>
+                                </div>
                             </div>
                             
                             
 
                             <div className="right-topnav">
                                 <div className="canvas" onClick={themeToggle}>
-                                    <Brightness4 />
-                                    <Brightness7 />
+                                    <DarkMode />
+                                    <LightMode />
                                 </div>
 
                                 <NavLink to="/Sign in"> 
                                     <div className="account">
-                                    <AccountCircleOutlined />Sign in
+                                    <AccountCircleOutlined />
+                                    <span>Sign in</span> 
                                     </div> 
                                 </NavLink>
 
@@ -62,13 +72,22 @@ const Navbar = () => {
                             <div className="left-centernav">
                                     <NavLink to='/newsletter'>Newsletter</NavLink>
                                     <NavLink to='/findastore'>Find a store</NavLink>
+                                    <div className="search">
+                                        <Search />
+                                        <form action="/search" ref={searchFunc}>
+                                            <input type="search" name="search" id="search" placeholder='Search' autoComplete='off'/>
+                                        </form>
+                                    </div>
                             </div>
                             <div className="right-centernav">
                                 <div id="favorites">
-                                    <FavoriteBorder /> Favorites
+                                    <FavoriteBorder /> 
+                                    <span>Favorites</span> 
                                 </div>
                                 <div id="shoppingbag">
-                                    <ShoppingBagOutlined /> Shopping bag
+                                    <ShoppingBagOutlined />
+                                    <span>Shopping bag</span> 
+                                    (10)
                                 </div>
                             </div>
                         </div>
