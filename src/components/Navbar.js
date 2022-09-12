@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect, useLayoutEffect} from 'react';
 import {NavLink, Outlet, useParams} from 'react-router-dom';
 import logo1 from '../images/logo_2.png';
 import { ThemeProvider } from 'styled-components';
@@ -6,15 +6,13 @@ import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search} from '@mui/icons-material';
 
 const Navbar = () => {
+    // states
+    const [theme, setTheme] = useState(true);
+
     // useParams
     const params = useParams();
     const {categoryLabel} = params;
-
-    //useRef
-    const searchFunc = useRef()
-
-    // states
-    const [theme, setTheme] = useState(true);
+    
     // droponhover state
     const [droponhover, setdroponhover ] = useState(false)
 
@@ -29,8 +27,17 @@ const Navbar = () => {
 
     const themeToggle = () => {
         setTheme(!theme)
+        window.localStorage.setItem("theme",!theme)
     }
 
+    useLayoutEffect(() => {
+        if(window.localStorage.getItem("theme") === null){
+            window.localStorage.setItem("theme", true)
+        }
+        else{
+            setTheme(JSON.parse(window.localStorage.getItem("theme")));
+        }
+    },[])
     return(
         <div>
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
@@ -74,8 +81,8 @@ const Navbar = () => {
                                     <NavLink to='/findastore'>Find a store</NavLink>
                                     <div className="search">
                                         <Search />
-                                        <form action="/search" ref={searchFunc}>
-                                            <input type="search" name="search" id="search" placeholder='Search' autoComplete='off'/>
+                                        <form action='/search'>
+                                            <input type="search" name="search" id="search" placeholder='Search' autoComplete='off' />
                                         </form>
                                     </div>
                             </div>

@@ -1,5 +1,5 @@
 import { StyledSearched } from "../theme"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 export const SearchedPage = () => {
     const [ searchParams ] = useSearchParams();
@@ -10,7 +10,7 @@ export const SearchedPage = () => {
         <StyledSearched>
             <section className="searchedpage">
                 <div className="breadcrumbs">
-                    <span>Home/search</span>
+                    <span><Link to="/">Home</Link> / <b>search</b></span>
                 </div>
                 Showing results for <b>"{searchText}"</b>
             </section>
