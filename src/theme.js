@@ -58,7 +58,26 @@ section span{
 `;
 
 export const StyledSearched = styled.div`
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: ${(props) => props.theme.fontColor};
+
+    .breadcrumbs{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .breadcrumbs span{
+        font-size: 12px;
+    }
+
+    .breadcrumbs a{
+        text-decoration: none;
+        color: ${(props) => props.theme.fontColor};
+    }
+
+
 `
 
 export const StyledCustomerService = styled.div`
