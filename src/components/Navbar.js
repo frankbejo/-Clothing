@@ -1,6 +1,6 @@
 import React, {useState, useLayoutEffect} from 'react';
 import {NavLink, Outlet, useParams} from 'react-router-dom';
-import logo1 from '../images/logo_2.png';
+import logo1 from '../images/logo_2.webp';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search} from '@mui/icons-material';
