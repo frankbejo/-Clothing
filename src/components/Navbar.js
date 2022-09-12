@@ -83,6 +83,7 @@ const Navbar = () => {
                                         <Search />
                                         <form action='/search'>
                                             <input type="search" name="search" id="search" placeholder='Search' autoComplete='off' />
+                                            <input type="text" name="" id="" />
                                         </form>
                                     </div>
                             </div>
