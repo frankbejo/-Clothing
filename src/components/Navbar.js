@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import {NavLink, Outlet, useParams} from 'react-router-dom';
 import logo1 from '../images/logo_2.png';
 import { ThemeProvider } from 'styled-components';
@@ -83,7 +83,6 @@ const Navbar = () => {
                                         <Search />
                                         <form action='/search'>
                                             <input type="search" name="search" id="search" placeholder='Search' autoComplete='off' />
-                                            <input type="text" name="" id="" />
                                         </form>
                                     </div>
                             </div>
