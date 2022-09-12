@@ -1,10 +1,9 @@
 import { StyledItem } from '../theme';
 import { Link, useParams } from 'react-router-dom';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export const Item = (props) => {
     const params = useParams();
-    const {categoryLabel, shopby, viewby} = params;
+    const {shopby, viewby} = params;
     return(
         <div>
             <StyledItem key={props.id}>
