@@ -336,9 +336,15 @@ export const StyledNavbar = styled.div`
         display: none;
     }
 
+    .menu-show span{
+        cursor: pointer;
+    }
+
     .menu-show a img{
+        position: relative;
         width: 50px;
         height: 50px;
+        z-index: -1
     }
 
     .search{
@@ -363,17 +369,18 @@ export const StyledNavbar = styled.div`
         border: none;
     }
 
-    @media screen and (max-width: 768px){
+    .side-menu-container{
+        display: none;
+    }
+
+    
+
+    @media screen and (max-width: 1024px){
         .botnav{
             display: none;
         }
 
-        .botnav{
-            margin-top: -20px;
-            padding-bottom: 20px;
-        }
-
-        #shopping #favorites, span{
+        #shoppingbag span, #favorites span{
             display: none;
         }
 
@@ -407,6 +414,80 @@ export const StyledNavbar = styled.div`
         .search{
             position: static;
         }
+
+        .side-menu-container{
+            display: flex;
+        }
+
+        .side-menu-container.hide:hover{
+            display:none;
+        }
+
+        .side-menu-list{
+            display: flex;
+            position: fixed;
+            width: 80%;
+            height: 100vh;
+            margin-left: -80%;
+            background-color: ${(props) => props.theme.body};
+            z-index: 1000;
+            transition: margin ease-in-out 300ms;
+            overflow: hidden;
+        }
+
+        .side-menu-container .backdrop{
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            margin-left: -100%;
+            background-color: ${(props) => props.theme.itembg}90;
+            backdrop-filter: blur(5px);
+            z-index: 100;
+        }
+
+        .side-menu-container.show .side-menu-list{
+            margin-left: 0px;
+        }
+
+        .side-menu-container.show .backdrop{
+            margin-left: 0;
+        }
+
+        .side-menu-list > ul{
+            position: absolute;
+            width: 100%;
+            transition: margin ease-in-out 300ms;
+        }
+
+        .side-menu-shopby{
+            margin-left: 100%;
+        }
+
+
+        .side-menu-list li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .side-menu-list li span, .side-menu-list a{
+            width: 100%;
+            height: 60px;
+            padding: 20px;
+        }
+
+        .side-menu-list a.active{
+            background-color: blueviolet;
+        }
+
+        .side-menu-list li:hover, .side-menu-list a:hover{
+            color: ${(props) => props.theme.body};
+            background-color: ${(props) => props.theme.fontColor};
+        }
+
+        
+
+        
     }
 `;
 
