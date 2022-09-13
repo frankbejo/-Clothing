@@ -1,20 +1,18 @@
 import React, {useState, useLayoutEffect} from 'react';
-import {NavLink, Outlet, useParams} from 'react-router-dom';
+import {NavLink, Outlet} from 'react-router-dom';
 import logo1 from '../images/logo_2.webp';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
-import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search} from '@mui/icons-material';
+import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
+import { MenuList } from './MenuList';
 
 const Navbar = () => {
     // states
     const [theme, setTheme] = useState(true);
 
-    // useParams
-    const params = useParams();
-    const {categoryLabel} = params;
-    
-    // droponhover state
+    // droponhover state / animation state
     const [droponhover, setdroponhover ] = useState(false)
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
 
      // category state for navbar
     const [usecategory, setcategory] = useState(null);
@@ -43,20 +41,68 @@ const Navbar = () => {
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
                 <StyledNavbar>
                     <nav className="navbar">
-
+                        <div className={`side-menu-container ${isMenuVisible ? "show":"hide"}`}>
+                            <div className="side-menu-list">
+                                <ul className="side-menu-category">
+                                    <li>
+                                        <span>Sign in</span>
+                                    </li>
+                                    <li>
+                                        <span>Men</span>
+                                        <NavigateNext />
+                                    </li>
+                                    <li>
+                                        <span>Women</span>
+                                        <NavigateNext />
+                                    </li>
+                                    <li>
+                                        <span>Divided</span>
+                                        <NavigateNext />
+                                    </li>
+                                    <li>
+                                        <span>Kids</span>
+                                        <NavigateNext />
+                                    </li>
+                                    <li>
+                                        <NavLink to="/about" onClick={() => setIsMenuVisible(false)}>About</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/sustainability" onClick={() => setIsMenuVisible(false)}>Sustainability</NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="side-menu-shopby">
+                                    <li>
+                                        <span><ArrowBack /></span>
+                                    </li>
+                                    <li>
+                                        <span>Shop By Products</span>
+                                        <NavigateNext />
+                                    </li>
+                                    <li>
+                                        <span>Trending Now</span>
+                                        <NavigateNext />
+                                    </li>
+                                    <li>
+                                        <span>New Arrival</span>
+                                        <NavigateNext />
+                                    </li>
+                                </ul>
+                        </div>
+                        <div className="backdrop" onClick={() => setIsMenuVisible(!isMenuVisible)}></div>
+                        </div>
                         <div className="topnav">
 
                             <div className="left-topnav">
                                 <NavLink to='/customerservice'>Customer Service</NavLink>
                                 <div className="menu-show">
-                                    <Menu />
+                                    <span onClick={() => setIsMenuVisible(true)}>
+                                        <Menu />
+                                    </span>
                                 <NavLink to="/">
                                     <img src={logo1} alt="" className={theme ? "light-mode": "dark-mode"} aria-label="Home" />
                                 </NavLink>
                                 </div>
                             </div>
-                            
-                            
 
                             <div className="right-topnav">
                                 <div className="canvas" onClick={themeToggle}>
@@ -74,7 +120,6 @@ const Navbar = () => {
                                 
                             </div>
                         </div>
-
                         <div className="centernav">
                             <div className="left-centernav">
                                     <NavLink to='/newsletter'>Newsletter</NavLink>
@@ -87,7 +132,7 @@ const Navbar = () => {
                                     </div>
                             </div>
                             <div className="right-centernav">
-                                <div id="favorites">
+                                <div id="favorites"> 
                                     <FavoriteBorder /> 
                                     <span>Favorites</span> 
                                 </div>
@@ -98,35 +143,13 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-
                         <div className="botnav">
                             <div className="brand-logo">
                                 <NavLink to="/">
                                     <img src={logo1} alt="" className={theme ? "light-mode": "dark-mode"} aria-label="Home" />
                                 </NavLink>
                             </div>
-                            <div className="menus">
-                                <ul className="menu-list">
-                                    <li className={`tohover ${usecategory === "men" && droponhover === true ? "on-hover":""}`} >
-                                        <span className={categoryLabel === "men" ? "active-menu":""} onMouseOver={() => GetCategories("men")} onClick={() => GetCategories("men")} onMouseOut = {() => setdroponhover(false)} >Men</span>
-                                    </li>
-                                    <li className={`tohover ${usecategory === "women" && droponhover === true ? "on-hover":""}`}>
-                                        <span className={categoryLabel === "women" ? "active-menu":""} onMouseOver={() => GetCategories("women")} onClick={() => GetCategories("women")} onMouseOut = {() => setdroponhover(false)}>Women</span>
-                                    </li>
-                                    <li className={`tohover ${usecategory === "divided" && droponhover === true ? "on-hover":""}`}>
-                                        <span className={categoryLabel === "divided" ? "active-menu":""} onMouseOver={() => GetCategories("divided")} onClick={() => GetCategories("divided")} onMouseOut = {() => setdroponhover(false)}>Divided</span>
-                                    </li>
-                                    <li className={`tohover ${usecategory === "kids" && droponhover === true ? "on-hover":""}`}>
-                                        <span className={categoryLabel === "kids" ? "active-menu":""} onMouseOver={() => GetCategories("kids")} onClick={() => GetCategories("kids")} onMouseOut = {() => setdroponhover(false)}>Kids</span>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/about" >About</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/Sustainability">Sustainability</NavLink>
-                                    </li>
-                                </ul>
-                            </div>
+                            <MenuList droponhover={droponhover} usecategory={usecategory} GetCategories={GetCategories} setdroponhover={setdroponhover}/>
                         </div>
                     </nav>
                         <div className={`dropdownhover ${droponhover ? "show":"hide"}`} onMouseOver={() => setdroponhover(true)} onMouseLeave = {() => setdroponhover(false)}>
@@ -152,8 +175,6 @@ const Navbar = () => {
                                 </ul>
                             </div>
                         </div>
-                    
-                    
                 </StyledNavbar>
                 <Outlet/>
                 <Globalstyles/>
