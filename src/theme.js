@@ -90,14 +90,79 @@ section{
     justify-content: center;
 }
 
+.covers-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.covers-container .some-text{
+    text-align: center;
+}
+
+.covers-container .some-text a{
+    font-size: 12px;
+    text-decoration: none;
+    color: ${(props) => props.theme.fontColor};
+}
+
+.some-updates{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    border: 1px solid ${(props) => props.theme.fontColor};
+}
+
+.some-updates a{
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    color:black;
+    border: 1px solid ${(props) => props.theme.fontColor};
+    background-color: ${(props) => props.theme.body}20;
+    backdrop-filter: blur(100px) brightness(250%);
+    padding: 10px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.some-updates img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.covers-container .some-text a:hover{
+    text-decoration: underline;
+}
+
 .image-container{
-    width: 900px;
+    width: 984px;
+    height: 100%;
 }
 
 .image-container img{
+    aspect-ratio: 1.5/1;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid ${(props) => props.theme.fontColor};
+}
 
+@media screen and (max-width: 1024px) {
+    .image-container{
+        width: 100%;
+        height: 100%;
+    }
+
+    .image-container img{
+        aspect-ratio: 2/1;
+    }
 }
 `;
 
@@ -494,6 +559,7 @@ export const StyledNavbar = styled.div`
         .side-menu-list a.active{
             font-weight: bold;
             background-color: ${(props) => props.theme.itembg};
+            text-decoration: overline;
         }
 
         .side-menu-list li:hover, .side-menu-list a:hover{
@@ -508,11 +574,8 @@ export const StyledNavbar = styled.div`
 
         .side-menu-list li.active {
             background-color: ${(props) => props.theme.itembg};
-        }
-
-        .side-menu-list li.active {
-            background-color: ${(props) => props.theme.itembg};
             font-weight: bold;
+            text-decoration: overline;
         }
 
         .side-menu-list li.active:hover{
