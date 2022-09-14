@@ -419,8 +419,12 @@ export const StyledNavbar = styled.div`
             display: flex;
         }
 
-        .side-menu-container.hide:hover{
-            display:none;
+        .side-menu-container .side-menu-list{
+            transition: margin ease-out 150ms;
+        }
+
+        .side-menu-container.show .side-menu-list{
+            transition: margin ease-in 300ms;
         }
 
         .side-menu-list{
@@ -431,8 +435,7 @@ export const StyledNavbar = styled.div`
             margin-left: -80%;
             background-color: ${(props) => props.theme.body};
             z-index: 1000;
-            transition: margin ease-in-out 300ms;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .side-menu-container .backdrop{
@@ -456,13 +459,15 @@ export const StyledNavbar = styled.div`
         .side-menu-list > ul{
             position: absolute;
             width: 100%;
+            height: 100vh;
             transition: margin ease-in-out 300ms;
+            overflow-y: auto;
         }
 
-        .side-menu-shopby{
+        .side-menu-shopby, .side-menu-viewby{
             margin-left: 100%;
+            background-color:  ${(props) => props.theme.body};
         }
-
 
         .side-menu-list li{
             display: flex;
@@ -470,14 +475,25 @@ export const StyledNavbar = styled.div`
             align-items: center;
         }
 
-        .side-menu-list li span, .side-menu-list a{
+        .side-menu-list a{
             width: 100%;
             height: 60px;
             padding: 20px;
         }
 
+        .side-menu-list li span{
+            height: 60px;
+            padding: 20px;
+        }
+
+        .side-menu-list svg{
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
         .side-menu-list a.active{
-            background-color: blueviolet;
+            font-weight: bold;
+            background-color: ${(props) => props.theme.itembg};
         }
 
         .side-menu-list li:hover, .side-menu-list a:hover{
@@ -485,9 +501,24 @@ export const StyledNavbar = styled.div`
             background-color: ${(props) => props.theme.fontColor};
         }
 
-        
+        /* show shopby if true */
+        .side-menu-shopby.show, .side-menu-viewby.show{
+            margin-left: 0;
+        }
 
-        
+        .side-menu-list li.active {
+            background-color: ${(props) => props.theme.itembg};
+        }
+
+        .side-menu-list li.active {
+            background-color: ${(props) => props.theme.itembg};
+            font-weight: bold;
+        }
+
+        .side-menu-list li.active:hover{
+            color: ${(props) => props.theme.body};
+            background-color: ${(props) => props.theme.fontColor};
+        }
     }
 `;
 
