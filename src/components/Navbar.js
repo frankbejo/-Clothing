@@ -131,7 +131,7 @@ const Navbar = () => {
 {/* ----------------------------show viewby side menu */}
                                 <ul className={`side-menu-viewby ${isMenuVisible.viewby ? "show":""}`}>
                                     <li onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, viewby: false}))}>
-                                        <ArrowBack /> <b>Products</b>
+                                        <ArrowBack /> <b>{`${useshopby.charAt(0).toUpperCase()}${useshopby.slice(1, )}`}</b>
                                         <span>Back</span>
                                     </li>
                                     <li onClick={() => CloseSideMenu()} >
