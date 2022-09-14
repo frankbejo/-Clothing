@@ -15,7 +15,12 @@ const Navbar = () => {
     const [droponhover, setdroponhover ] = useState(false)
     // category state for navbar
     const [usecategory, setcategory] = useState("");
-    const [useshopby, setshopby] = useState("");
+    const [useshopby, setshopby] = useState(
+        {
+            shopbyLink: "",
+            shopbyName: ""
+        }
+    );
 
     // mobile side menu show/hide
     const [isMenuVisible, setIsMenuVisible] = useState(
@@ -45,8 +50,11 @@ const Navbar = () => {
         }))
     }
 
-    const GetCategoryForViewBy = (shop) => {
-        setshopby(shop)
+    const GetCategoryForViewBy = (shopbylink, shopbyname) => {
+        setshopby(() => ({
+            shopbyLink: shopbylink,
+            shopbyName: shopbyname
+        }))
         setIsMenuVisible((isMenuVisible) => ({
             ...isMenuVisible,
             viewby: true,
@@ -112,18 +120,18 @@ const Navbar = () => {
 {/* ----------------------------show shopby side menu */}
                                 <ul className={`side-menu-shopby ${isMenuVisible.shopby ? "show":""}`}>
                                     <li onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, shopby: false}))}>
-                                        <ArrowBack /> <b>{`${usecategory.charAt(0).toUpperCase()}${usecategory.slice(1, )}`}</b>
+                                        <ArrowBack /> <b>{usecategory.charAt(0).toUpperCase() + usecategory.slice(1, )}</b>
                                         <span>Back</span>
                                     </li>
-                                    <li onClick={() => GetCategoryForViewBy("all")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
+                                    <li onClick={() => GetCategoryForViewBy("all", "By Products")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
                                         <span>Shop By Products</span>
                                         <NavigateNext />
                                     </li>
-                                    <li onClick={() => GetCategoryForViewBy("trending")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
+                                    <li onClick={() => GetCategoryForViewBy("trending", "Trending Now")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
                                         <span>Trending Now</span>
                                         <NavigateNext />
                                     </li>
-                                    <li onClick={() => GetCategoryForViewBy("newarrival")} className={usecategory === categoryLabel & shopby === "newarrival" ? "active":""}>
+                                    <li onClick={() => GetCategoryForViewBy("newarrival","New Arrival")} className={usecategory === categoryLabel & shopby === "newarrival" ? "active":""}>
                                         <span>New Arrival</span>
                                         <NavigateNext />
                                     </li>
@@ -131,11 +139,11 @@ const Navbar = () => {
 {/* ----------------------------show viewby side menu */}
                                 <ul className={`side-menu-viewby ${isMenuVisible.viewby ? "show":""}`}>
                                     <li onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, viewby: false}))}>
-                                        <ArrowBack /> <b>{`${useshopby.charAt(0).toUpperCase()}${useshopby.slice(1, )}`}</b>
+                                        <ArrowBack /> <b>{useshopby.shopbyName}</b>
                                         <span>Back</span>
                                     </li>
                                     <li onClick={() => CloseSideMenu()} >
-                                        <NavLink to={`/products/${usecategory}/${useshopby}/viewall`}>View All</NavLink>
+                                        <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/viewall`}>View All</NavLink>
                                     </li>
                                 </ul>
 
