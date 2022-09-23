@@ -4,6 +4,8 @@ import img1 from '../images/img1.jpg';
 import img3 from '../images/img3.jpg';
 
 export const Home = () => {
+
+    
     return(
         <HomeStyled>
         <section className="home">
