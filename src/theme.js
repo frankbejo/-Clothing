@@ -777,13 +777,13 @@ export const StyledProducts = styled.div`
 
         @media screen and (max-width: 2560px ) {
             .products-container{
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(6, 1fr);
             }
         }
 
         @media screen and (max-width: 2040px ) {
             .products-container{
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(5, 1fr);
             }
         }
 
@@ -795,7 +795,7 @@ export const StyledProducts = styled.div`
 
         @media screen and (max-width: 1244px ) {
             .products-container{
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -818,24 +818,11 @@ export const StyledProducts = styled.div`
 
         @media screen and (max-width: 635px ) {
             .products-container{
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 420px ) {
-            .products-container{
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-        }
-
-        @media screen and (max-width: 400px ) {
-            .products-container{
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media screen and (max-width: 320px ) {
+        @media screen and (max-width: 420px ) {
             .products-container{
                 grid-template-columns: repeat(2, 1fr);
             }
