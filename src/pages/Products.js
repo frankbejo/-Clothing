@@ -1,49 +1,59 @@
 import { useState, useEffect} from "react";
 import { Link, NavLink, useParams } from "react-router-dom"
 import { ProductsContainer } from "../components/ProductsContainer";
-import {products} from '../data'
 import {SideFilter} from "../components/SideFilter";
 import { StyledProducts } from "../theme";
 
 export const Products = () => {
+    const [isError, setIsError] = useState(false);
     const [passeddata, setpasseddata] = useState([]);
     const [filterdata, setfilterdata] = useState([]);
     const { categoryLabel, shopby, viewby} = useParams();
-
-    const GetThisData = () => {
-        setpasseddata(products)
-    }
-
-    // filter data by categories
-    const filterCategory = passeddata.filter(items => 
-        items.category === categoryLabel)
-
-    // filter by new, trend, products
-    const FilterByShop = () => {
-        switch(shopby){
-            case 'all':
-                setfilterdata(filterCategory);
-            break;
-
-            case 'trending':
-                setfilterdata(filterCategory.filter(items => items.isHot === true));
-            break;
-
-            case 'newarrival':
-                setfilterdata(filterCategory.filter(items => items.newarrive === true));
-            break;
-
-            default:
-                setfilterdata(filterCategory);
+    
+    const fetchData = async () => {
+        try{
+            const data = await fetch("https://test-server-side-api.herokuapp.com/products")
+            const res = await data.json()
+            setpasseddata(res)
         }
+        catch(err){
+            setIsError(true)
+        }
+            
+    }
+
+    const refreshPage = () => {
+        window.location.reload()
     }
 
     useEffect(() => {
-        GetThisData()
-        }, [])
+        fetchData()
+    }, [])
 
-        
     useEffect(() => {
+        const filterCategory = passeddata.filter(items => 
+            items.category === categoryLabel)
+
+        const datenow = new Date()
+
+        const FilterByShop = () => {
+            switch(shopby){
+                case 'all':
+                    setfilterdata(filterCategory);
+                break;
+    
+                case 'trending':
+                    setfilterdata(filterCategory.filter(items => items.isHot === true));
+                break;
+    
+                case 'newarrival':
+                    setfilterdata(filterCategory.filter((item) => new Date(item.created).getFullYear() === datenow.getFullYear() && new Date(item.created).getMonth() === datenow.getMonth()));
+                break;
+    
+                default:
+                    setfilterdata(null);
+            }
+        }
         FilterByShop()
     }, [categoryLabel, shopby, passeddata])
     
@@ -51,12 +61,20 @@ export const Products = () => {
         <StyledProducts>
             <section className="products">
                 <div className="breadcrumbs">
-                        <span><Link to="/"> Home</Link> <NavLink to={`/products/${categoryLabel}/all/viewall`}>{`/ ` + categoryLabel}</NavLink> {`/ ` + shopby} <b>{`/ ` + viewby}</b></span>
+                        <span>
+                            <Link to="/"> Home</Link> 
+                            <NavLink to={`/products/${categoryLabel}/all/viewall`}>
+                                {`/ ` + categoryLabel}
+                            </NavLink> {`/ ` + shopby} 
+                            <b>
+                                {`/ ` + viewby}
+                            </b>
+                        </span>
                     </div>
                 <div className="main-container">
                     <SideFilter />
                     <div className="side-main-container">
-                            <ProductsContainer filterdata={filterdata} passeddata={passeddata} />
+                            <ProductsContainer filterdata={filterdata} passeddata={passeddata} isError={isError} refreshPage={refreshPage} />
                     </div>
                 </div>
                 

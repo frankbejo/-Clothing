@@ -4,7 +4,7 @@ import FilterThis from "../components/FilterThis";
 
 export const ProductsContainer = (props) => {
     const { categoryLabel } = useParams()
-    const {filterdata, passeddata} = props;
+    const {filterdata, passeddata, refreshPage, isError} = props;
     return(
         <>
                 <div className="filter">
@@ -15,33 +15,41 @@ export const ProductsContainer = (props) => {
                         </div>
                     </div>
             {
-                passeddata.length === 0 ? 
+                isError ? 
                 (
-                    <div className="loading-products-container">
-                        <div className="loading-spinner"></div>
-                        <div className="loading-spinner-hand"></div>
-                    </div>
+                    <h2 onClick={() => refreshPage()}>Try again</h2>
                 )
                 :
                 (
-                    filterdata.length === 0 ? 
+                    passeddata.length === 0 ? 
                     (
-                        <h1>No data to show</h1>
+                        <div className="loading-products-container">
+                        <div className="loading-spinner"></div>
+                        <div className="loading-spinner-hand"></div>
+                        </div>
                     )
                     :
                     (
-                        <div className="products-container" >
-                            {
-                            filterdata.filter(items => items.category === categoryLabel)
-                            .map((item, index) => 
+                        filterdata.length === 0 ? 
+                        (
+                            <h1>No data to show</h1>
+                        )
+                        :
+                        (
+                            <div className="products-container" >
                                 {
-                            return <Item {...item} key={index}/>
-                                })
-                            }
-                        </div>
+                                filterdata.filter(items => items.category === categoryLabel)
+                                .map((item, index) => 
+                                    {
+                                return <Item {...item} key={index}/>
+                                    })
+                                }
+                            </div>
+                        )
+                        
                     )
-                    
                 )
+                
             }         
         </>
     )
