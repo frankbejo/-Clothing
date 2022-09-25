@@ -4,36 +4,24 @@ import { ProductsContainer } from "../components/ProductsContainer";
 import {SideFilter} from "../components/SideFilter";
 import { StyledProducts } from "../theme";
 
-export const Products = () => {
+export const Products = (props) => {
+    const {usedata, haserror} = props;
     const [isError, setIsError] = useState(false);
     const [passeddata, setpasseddata] = useState([]);
     const [filterdata, setfilterdata] = useState([]);
     const { categoryLabel, shopby, viewby} = useParams();
     
-    const fetchData = async () => {
-        try{
-            const data = await fetch("https://test-server-side-api.herokuapp.com/products")
-            const res = await data.json()
-            setpasseddata(res)
-        }
-        catch(err){
-            setIsError(true)
-        }
-            
-    }
-
     const refreshPage = () => {
         window.location.reload()
     }
 
     useEffect(() => {
-        fetchData()
+        setpasseddata(usedata)
+        setIsError(haserror)
     }, [])
 
     useEffect(() => {
-        const filterCategory = passeddata.filter(items => 
-            items.category === categoryLabel)
-
+        const filterCategory = passeddata.filter(items => items.category === categoryLabel)
         const datenow = new Date()
 
         const FilterByShop = () => {
@@ -43,7 +31,7 @@ export const Products = () => {
                 break;
     
                 case 'trending':
-                    setfilterdata(filterCategory.filter(items => items.isHot === true));
+                    setfilterdata(filterCategory.filter(items => items.ishot === true));
                 break;
     
                 case 'newarrival':

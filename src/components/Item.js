@@ -6,8 +6,8 @@ export const Item = (props) => {
     const {shopby, viewby} = params;
     return(
         <div>
-            <StyledItem key={props.id}>
-                <Link to={`/products/${props.category}/${shopby}/${viewby}/${props.id}/${props.itemname}`} >
+            <StyledItem key={props._id}>
+                <Link to={`/products/${props.category}/${shopby}/${viewby}/${props._id}/${props.itemname}`} >
                 <div className="item" >
                     <div className="cover">
                         <img src={props.product_image} alt={props.itemname} width="100%" height="100%"/>
