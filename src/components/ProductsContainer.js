@@ -46,7 +46,6 @@ export const ProductsContainer = (props) => {
                                 }
                             </div>
                         )
-                        
                     )
                 )
                 

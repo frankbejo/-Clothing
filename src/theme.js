@@ -85,12 +85,14 @@ export const StyledCustomerService = styled.div`
 
 export const HomeStyled = styled.div`
 section{
+    width: 100%;
     display: flex;
     color: white;
     justify-content: center;
 }
 
 .covers-container{
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,12 +110,13 @@ section{
 }
 
 .some-updates{
-    display: flex;
-    position: relative;
-    justify-content: center;
     width: 100%;
     height: 150px;
+    display: flex;
+    position: relative;
     border: 1px solid ${(props) => props.theme.fontColor};
+    justify-content: center;
+    overflow: hidden;
 }
 
 .some-updates a{
@@ -142,19 +145,23 @@ section{
 }
 
 .image-container{
-    width: 984px;
+    width: 100%;
     height: 100%;
 }
 
 .image-container img{
-    aspect-ratio: 1.5/1;
     width: 100%;
     height: 100%;
     object-fit: cover;
     border: 1px solid ${(props) => props.theme.fontColor};
+    aspect-ratio: 2/1;
 }
 
 @media screen and (max-width: 1024px) {
+    .covers-container{
+        width: 100%;
+    }
+
     .image-container{
         width: 100%;
         height: 100%;
@@ -835,10 +842,6 @@ export const StyledSingleProduct = styled.div`
     display: flex;
     justify-content: center;
 
-    section{
-        height: 1000vh;
-    }
-
     span{
         font-size: 13px;
     }
@@ -848,42 +851,51 @@ export const StyledSingleProduct = styled.div`
         color: ${(props) => props.theme.fontColor};
     }
     .item{
-        width: 100%;
+        width: 80%;
+        height: 100%;
         display: flex;
+        gap: 10px;
         justify-content: center;
-        gap: 20px;
+    }
+
+    .cover{
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+        display: flex;
     }
     
-    .cover{
-        gap: 10px;
-        flex-direction: row;
-        height: auto;
-        justify-content: center;
-        
+    .info{
+        background-color: ${(props) => props.theme.itembg};
+    }
+
+    .single-image{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid ${(props) => props.theme.fontColor};
+        aspect-ratio: 2.5/4;
     }
 
     .single-image img{
         width: 100%;
         height: 100%;
         object-fit: cover;
-        background-size: contain;
-    }
-
-    .info{
-        min-width: 350px;
-        max-width: 100%;
-        background-color: black;
-        position: relative;
+        aspect-ratio: 2.5/4;
     }
 
     .info-container{
+        width: 300px;
         display: flex;
         justify-content: space-between;
         padding: 20px;
         background-color: ${(props) => props.theme.itembg};
+        border: 1px solid ${(props) => props.theme.fontColor};
         color: ${(props) => props.theme.fontColor};
         position: sticky;
         top: 0;
+        gap: 20px;
         
     }
 
@@ -893,9 +905,18 @@ export const StyledSingleProduct = styled.div`
         gap: 10px;
     }
 
+    .info-container .left .itemname{
+        font-weight: bold;
+    }
+
     @media screen and (max-width: 1065px) {
         .item{
+            width: 100%;
             flex-direction: column;
+        }
+
+        .info-container{
+            width: 100%;
         }
     }
 `;
