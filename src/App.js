@@ -14,7 +14,7 @@ function App() {
 
   const fetchData = async () => {
     try{
-      const res = await fetch("http://localhost:5000/products")
+      const res = await fetch("https://test-server-side-api.herokuapp.com/products")
       const data = await res.json()
       setusedata(data)
     }
