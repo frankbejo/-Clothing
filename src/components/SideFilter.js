@@ -1,6 +1,11 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import { TopMenuSkeleton } from "./TopMenuSkeleton";
 
-export const SideFilter = ({usedata}) => {
+export const SideFilter = (props) => {
+    const {usedata, haserror} = props;
+    const [isError, setIsError] = useState([]);
     const params = useParams();
     const {categoryLabel} = params;
 
@@ -40,66 +45,85 @@ export const SideFilter = ({usedata}) => {
                 return
             }
         })
+
+    useEffect(() => {
+        setIsError(haserror)
+    }, [haserror])
     return(
                 <div className="side-nav">
-                    <div className="side-nav-fixed">
-                        <ul className="side-filter">
-                            <li>
-                                <span className="side-filter-header">New Arrival</span>
-                                <ul className="side-filter-items">
-                                    <li>
-                                        <NavLink to={`/products/${categoryLabel}/newarrival/viewall`}>View All</NavLink>
-                                    </li>
-                                    
-                                    {
-                                        filterednewarr.sort().map((item, index) => {
-                                        return(
-                                            <li key={`${item.type}${index}`}>
-                                                <NavLink to={`/products/${categoryLabel}/newarrival/${item.toLowerCase().replace(" ", "")}`} >{item}</NavLink>
-                                            </li>
-                                        )
-                                    })
-                                    }
-                                </ul>
-                            </li>
-
-                            <li>
-                                <span className="side-filter-header">Trending Now</span>
-                                <ul className="side-filter-items">
-                                    <li>
-                                        <NavLink to={`/products/${categoryLabel}/trending/viewall`}>View All</NavLink>
-                                    </li>
-                                    {
-                                        filteredtrending.sort().map((item, index) => {
-                                            return(
-                                                <li key={`${item.type}${index}`}>
-                                                    <NavLink to={`/products/${categoryLabel}/trending/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                    {
+                        isError ? (
+                            <h1>Error</h1>
+                        ):
+                        (
+                            usedata.length === 0 ? (
+                                <div className="side-nav-fixed-skeleton">
+                                    <TopMenuSkeleton />
+                                    <TopMenuSkeleton />
+                                    <TopMenuSkeleton />
+                                </div>
+                            ):
+                            (
+                                <div className="side-nav-fixed">
+                                    <ul className="side-filter">
+                                        <li>
+                                            <span className="side-filter-header">New Arrival</span>
+                                            <ul className="side-filter-items">
+                                                <li>
+                                                    <NavLink to={`/products/${categoryLabel}/newarrival/viewall`}>View All</NavLink>
                                                 </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </li>
+                                                {
+                                                    filterednewarr.sort().map((item, index) => {
+                                                    return(
+                                                        <li key={`${item.type}${index}`}>
+                                                            <NavLink to={`/products/${categoryLabel}/newarrival/${item.toLowerCase().replace(" ", "")}`} >{item}</NavLink>
+                                                        </li>
+                                                    )
+                                                })
+                                                }
+                                            </ul>
+                                        </li>
 
-                            <li>
-                                <span className="side-filter-header">Shop by Products</span>
-                                <ul className="side-filter-items">
-                                    <li>
-                                        <NavLink to={`/products/${categoryLabel}/all/viewall`}>View All</NavLink>
-                                    </li>
-                                    {
-                                        filteredbyshop.sort().map((item, index) => {
-                                            return(
-                                                <li key={`${item.type}${index}`}>
-                                                    <NavLink to={`/products/${categoryLabel}/all/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                        <li>
+                                            <span className="side-filter-header">Trending Now</span>
+                                            <ul className="side-filter-items">
+                                                <li>
+                                                    <NavLink to={`/products/${categoryLabel}/trending/viewall`}>View All</NavLink>
                                                 </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                                                {
+                                                    filteredtrending.sort().map((item, index) => {
+                                                        return(
+                                                            <li key={`${item.type}${index}`}>
+                                                                <NavLink to={`/products/${categoryLabel}/trending/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <span className="side-filter-header">Shop by Products</span>
+                                            <ul className="side-filter-items">
+                                                <li>
+                                                    <NavLink to={`/products/${categoryLabel}/all/viewall`}>View All</NavLink>
+                                                </li>
+                                                {
+                                                    filteredbyshop.sort().map((item, index) => {
+                                                        return(
+                                                            <li key={`${item.type}${index}`}>
+                                                                <NavLink to={`/products/${categoryLabel}/all/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )
+                        )
+                    }
                 </div>
         
     )
