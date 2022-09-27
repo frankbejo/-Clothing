@@ -1,15 +1,20 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect, useEffect} from 'react';
 import {NavLink, Outlet, useParams} from 'react-router-dom';
 import logo1 from '../images/logo_2.webp';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
 import { MenuList } from './MenuList';
+import { TopMenuSkeleton } from './TopMenuSkeleton';
 
-const Navbar = ({usedata}) => {
+const Navbar = (props) => {
+    const {usedata, haserror} = props;
     const {categoryLabel, shopby} = useParams();
     // states
     const [theme, setTheme] = useState(true);
+    
+    // skeleton when loading
+    const [isError, setIsError] = useState(false)
 
     // droponhover state / animation state
     const [droponhover, setdroponhover ] = useState(false)
@@ -123,6 +128,9 @@ const Navbar = ({usedata}) => {
         }
     },[])
 
+    useEffect(() => {
+        setIsError(haserror)
+    }, [haserror])
     return(
         <div>
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
@@ -293,55 +301,71 @@ const Navbar = ({usedata}) => {
                         </div>
                     </nav>
                         <div className={`dropdownhover ${droponhover ? "show":"hide"}`} onMouseOver={() => setdroponhover(true)} onMouseLeave = {() => setdroponhover(false)}>
-                            <div className="top-menus"> 
-                                    
-                                <ul className="newarrival">
-                                    <li><span>New Arrival</span></li>
-                                    <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/newarrival/viewall`} >View All</NavLink>
-                                    </li>
-                                    {
-                                        filterednewarr.sort().map((item, index) => {
-                                            return(
-                                                <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
-                                                    <NavLink to={`/products/${usecategory}/newarrival/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                                <ul className="trendingnew">
-                                    <li><span>Trending Now</span></li>
-                                    <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
-                                    </li>
-                                    {
-                                        filteredtrending.sort().map((item, index) => {
-                                            return(
-                                                <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
-                                                    <NavLink to={`/products/${usecategory}/trending/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                                <ul className="byproducts">
-                                    <li><span>Shop by Products</span></li>
-                                    <li onClick={() => setdroponhover(false)}>
-                                        <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
-                                    </li>
-                                    {
-                                        filteredbyshop.sort().map((item, index) => {
-                                            return(
-                                                <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
-                                                    <NavLink to={`/products/${usecategory}/all/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                    
-                                </ul>
+                            {
+                                isError ? (
+                                    <h1>Error</h1>
+                                ):
+                                (
+                                    usedata.length === 0 ? (
+                                        <div className="top-menus-skeleton">
+                                            <TopMenuSkeleton />
+                                            <TopMenuSkeleton />
+                                            <TopMenuSkeleton />
+                                        </div>
+                                    ):
+                                    (
+                                        <div className="top-menus"> 
+                                        <ul className="newarrival">
+                                            <li><span>New Arrival</span></li>
+                                            <li onClick={() => setdroponhover(false)}>
+                                                <NavLink to={`/products/${usecategory}/newarrival/viewall`} >View All</NavLink>
+                                            </li>
+                                            {
+                                                filterednewarr.sort().map((item, index) => {
+                                                    return(
+                                                        <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                            <NavLink to={`/products/${usecategory}/newarrival/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                        <ul className="trendingnew">
+                                            <li><span>Trending Now</span></li>
+                                            <li onClick={() => setdroponhover(false)}>
+                                                <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
+                                            </li>
+                                            {
+                                                filteredtrending.sort().map((item, index) => {
+                                                    return(
+                                                        <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                            <NavLink to={`/products/${usecategory}/trending/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                        <ul className="byproducts">
+                                            <li><span>Shop by Products</span></li>
+                                            <li onClick={() => setdroponhover(false)}>
+                                                <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
+                                            </li>
+                                            {
+                                                filteredbyshop.sort().map((item, index) => {
+                                                    return(
+                                                        <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                            <NavLink to={`/products/${usecategory}/all/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                            
+                                        </ul>
                             </div>
+                                    )
+                                )
+                            }
+                            
                         </div>
                 </StyledNavbar>
                 <Outlet/>

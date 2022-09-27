@@ -19,6 +19,7 @@ export const lighttheme = {
 };
 
 export const Globalstyles = createGlobalStyle`
+
 *{
     margin: 0;
     padding: 0;
@@ -364,7 +365,6 @@ export const StyledNavbar = styled.div`
         font-weight: bold;
     }
 
-
     .dropdownhover{
         position: absolute;
         height: auto;
@@ -396,6 +396,43 @@ export const StyledNavbar = styled.div`
         display: flex;
         justify-content: center;
         gap: 50px;
+    }
+
+    .top-menus-skeleton{
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .top-menus-skeleton ul{
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .top-menus-skeleton ul li:first-child{
+        position: relative;
+        height: 17px;
+        width: 95px;
+        margin-bottom: 5px;
+        animation: skeletonanimate 1000ms infinite alternate;
+    }
+
+    @keyframes skeletonanimate {
+        0%{
+            background-color: ${(props) => props.theme.itembg};
+        }
+        100%{
+            background-color: ${(props) => props.theme.itembg}70;
+        }
+    }
+
+    .top-menus-skeleton li{
+        position: relative;
+        height: 15px;
+        width: 61px;
+        background-color: azure;
+        animation: skeletonanimate 1000ms infinite alternate-reverse;
     }
 
     .top-menus span{
@@ -703,6 +740,50 @@ export const StyledProducts = styled.div`
         font-size: 13px;
     }
 
+    .side-nav-fixed-skeleton{
+        padding: 10px;
+        display:flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .side-nav-fixed-skeleton ul{
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+
+    .side-nav-fixed-skeleton ul li:first-child{
+        position: relative;
+        height: 17px;
+        width: 91px;
+        margin-left: 0; 
+        margin-bottom: 6px;
+        animation: animationskeleton 1000ms infinite alternate;
+    }
+
+    .side-nav-fixed-skeleton li{
+        position: relative;
+        height: 15px;
+        width: 61px;
+        list-style: none;
+        margin-left: 10px;
+        animation: animationskeleton 1000ms infinite alternate-reverse;
+    }
+
+    @keyframes animationskeleton {
+        0%{
+            background-color: ${props => props.theme.fontColor};
+            opacity: 3%;
+        }
+        100%{
+            background-color: ${props => props.theme.fontColor};
+            opacity: 7%;
+        }
+    }
+
     .side-filter > *{
         margin-bottom: 20px;
     }
@@ -733,7 +814,7 @@ export const StyledProducts = styled.div`
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: ${props => props.theme.fontColor};;
+        background-color: ${props => props.theme.fontColor};
     }
 
     .loading-spinner::after{

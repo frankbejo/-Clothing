@@ -33,7 +33,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-        <Route path="/" element={<Navbar usedata={usedata}/>}>
+        <Route path="/" element={<Navbar usedata={usedata} haserro={haserror}/>}>
           <Route index element={<Home />} />
           <Route path="search" element={<SearchedPage />} />
           <Route path="customerservice" element={<CustomerService />} />

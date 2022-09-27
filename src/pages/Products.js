@@ -61,7 +61,7 @@ export const Products = (props) => {
                         </span>
                     </div>
                 <div className="main-container">
-                    <SideFilter usedata={usedata}/>
+                    <SideFilter usedata={usedata} haserror={haserror}/>
                     <div className="side-main-container">
                             <ProductsContainer filterdata={filterdata} passeddata={passeddata} isError={isError} refreshPage={refreshPage} />
                     </div>
