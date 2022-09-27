@@ -19,7 +19,7 @@ export const Products = (props) => {
     useEffect(() => {
         setpasseddata(usedata)
         setIsError(haserror)
-    }, [usedata])
+    }, [usedata, haserror])
 
     useEffect(() => {
         const filterCategory = passeddata.filter(items => items.category === categoryLabel)

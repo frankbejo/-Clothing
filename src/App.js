@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Error } from "./pages/Error";
 import { Home } from "./pages/Home";
 import { CustomerService } from "./pages/CustomerService";
