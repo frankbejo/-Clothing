@@ -11,6 +11,7 @@ export const Products = (props) => {
     const [filterdata, setfilterdata] = useState([]);
     const { categoryLabel, shopby, viewby} = useParams();
     
+    
     const refreshPage = () => {
         window.location.reload()
     }
@@ -18,7 +19,7 @@ export const Products = (props) => {
     useEffect(() => {
         setpasseddata(usedata)
         setIsError(haserror)
-    }, [])
+    }, [usedata])
 
     useEffect(() => {
         const filterCategory = passeddata.filter(items => items.category === categoryLabel)
@@ -52,15 +53,15 @@ export const Products = (props) => {
                         <span>
                             <Link to="/"> Home</Link> 
                             <NavLink to={`/products/${categoryLabel}/all/viewall`}>
-                                {`/ ` + categoryLabel}
-                            </NavLink> {`/ ` + shopby} 
+                                {` / ` + categoryLabel}
+                            </NavLink> {` / ` + shopby} 
                             <b>
-                                {`/ ` + viewby}
+                                {` / ` + viewby}
                             </b>
                         </span>
                     </div>
                 <div className="main-container">
-                    <SideFilter />
+                    <SideFilter usedata={usedata}/>
                     <div className="side-main-container">
                             <ProductsContainer filterdata={filterdata} passeddata={passeddata} isError={isError} refreshPage={refreshPage} />
                     </div>

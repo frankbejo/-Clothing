@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import FilterThis from "../components/FilterThis";
 
 export const ProductsContainer = (props) => {
-    const { categoryLabel } = useParams()
+    const { viewby } = useParams()
     const {filterdata, passeddata, refreshPage, isError} = props;
     return(
         <>
@@ -38,7 +38,7 @@ export const ProductsContainer = (props) => {
                         (
                             <div className="products-container" >
                                 {
-                                filterdata.filter(items => items.category === categoryLabel)
+                                filterdata.filter(item => item.type.replace(" ","").toLowerCase() === viewby || viewby === "viewall")
                                 .map((item, index) => 
                                     {
                                 return <Item {...item} key={index}/>
@@ -46,6 +46,7 @@ export const ProductsContainer = (props) => {
                                 }
                             </div>
                         )
+                        
                     )
                 )
                 
