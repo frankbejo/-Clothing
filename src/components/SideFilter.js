@@ -18,8 +18,9 @@ export const SideFilter = (props) => {
             filterednewarr.push(item.type)
             }
         else{
-            return
+            return{}
         }
+        return{}
     })
 
     // trending filtered
@@ -30,8 +31,9 @@ export const SideFilter = (props) => {
                 filteredtrending.push(item.type)
                 }
             else{
-                return
+                return{}
             }
+            return{}
         })
 
         // all types filtered
@@ -42,8 +44,9 @@ export const SideFilter = (props) => {
                 filteredbyshop.push(item.type)
                 }
             else{
-                return
+                return{}
             }
+            return{}
         })
 
     useEffect(() => {
