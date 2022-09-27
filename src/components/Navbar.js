@@ -5,8 +5,9 @@ import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
 import { MenuList } from './MenuList';
+import { useEffect } from 'react';
 
-const Navbar = () => {
+const Navbar = ({usedata}) => {
     const {categoryLabel, shopby} = useParams();
     // states
     const [theme, setTheme] = useState(true);
@@ -72,6 +73,43 @@ const Navbar = () => {
         window.localStorage.setItem("theme",!theme)
     }
 
+    // new arrival filtered
+    const datenow = new Date()
+    const filterednewarr = [];
+    usedata.filter(item => item.category === usecategory && new Date(item.created).getFullYear() === datenow.getFullYear() && new Date(item.created).getMonth() === datenow.getMonth())
+        .map((item) => {
+            if(!filterednewarr.includes(item.type)){
+                filterednewarr.push(item.type)
+                }
+            else{
+                return
+            }
+        })
+    
+    // trending filtered
+    const filteredtrending = [];
+    usedata.filter(item => item.category === usecategory && item.ishot === true)
+        .map(item => {
+            if(!filteredtrending.includes(item.type)){
+                filteredtrending.push(item.type)
+                }
+            else{
+                return
+            }
+        })
+
+    // all types filtered
+    const filteredbyshop = [];
+    usedata.filter(item => item.category === usecategory)
+        .map(item => {
+            if(!filteredbyshop.includes(item.type)){
+                filteredbyshop.push(item.type)
+                }
+            else{
+                return
+            }
+        })
+
     useLayoutEffect(() => {
         if(window.localStorage.getItem("theme") === null){
             window.localStorage.setItem("theme", true)
@@ -80,6 +118,7 @@ const Navbar = () => {
             setTheme(JSON.parse(window.localStorage.getItem("theme")));
         }
     },[])
+
     return(
         <div>
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
@@ -222,18 +261,46 @@ const Navbar = () => {
                                     <li onClick={() => setdroponhover(false)}>
                                         <NavLink to={`/products/${usecategory}/newarrival/viewall`} >View All</NavLink>
                                     </li>
+                                    {
+                                        filterednewarr.sort().map((item, index) => {
+                                            return(
+                                                <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                    <NavLink to={`/products/${usecategory}/newarrival/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                </li>
+                                            )
+                                        })
+                                    }
                                 </ul>
                                 <ul className="trendingnew">
                                     <li><span>Trending Now</span></li>
                                     <li onClick={() => setdroponhover(false)}>
                                         <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
                                     </li>
+                                    {
+                                        filteredtrending.sort().map((item, index) => {
+                                            return(
+                                                <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                    <NavLink to={`/products/${usecategory}/trending/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                </li>
+                                            )
+                                        })
+                                    }
                                 </ul>
                                 <ul className="byproducts">
                                     <li><span>Shop by Products</span></li>
                                     <li onClick={() => setdroponhover(false)}>
                                         <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
                                     </li>
+                                    {
+                                        filteredbyshop.sort().map((item, index) => {
+                                            return(
+                                                <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                    <NavLink to={`/products/${usecategory}/all/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                    
                                 </ul>
                             </div>
                         </div>

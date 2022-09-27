@@ -355,9 +355,16 @@ export const StyledNavbar = styled.div`
         font-weight: bold;
     }
 
+    .top-menus li a{
+        font-size: 13px;
+        font-weight: 300;
+    }
+
     .top-menus .active{
         font-weight: bold;
     }
+
+
     .dropdownhover{
         position: absolute;
         height: auto;
@@ -388,11 +395,12 @@ export const StyledNavbar = styled.div`
     .top-menus{
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 50px;
     }
 
     .top-menus span{
         font-weight: bold;
+        margin-bottom: 5px;
     }
 
     .top-menus ul{
@@ -403,6 +411,7 @@ export const StyledNavbar = styled.div`
     .top-menus ul li{
         display: flex;
     }
+
 
     .menu-show{
         display: none;
