@@ -5,7 +5,6 @@ import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
 import { MenuList } from './MenuList';
-import { useEffect } from 'react';
 
 const Navbar = ({usedata}) => {
     const {categoryLabel, shopby} = useParams();
@@ -14,6 +13,7 @@ const Navbar = ({usedata}) => {
 
     // droponhover state / animation state
     const [droponhover, setdroponhover ] = useState(false)
+    
     // category state for navbar
     const [usecategory, setcategory] = useState("");
     const [useshopby, setshopby] = useState(
@@ -82,8 +82,10 @@ const Navbar = ({usedata}) => {
                 filterednewarr.push(item.type)
                 }
             else{
-                return
+                return{}
             }
+
+            return{}
         })
     
     // trending filtered
@@ -94,8 +96,9 @@ const Navbar = ({usedata}) => {
                 filteredtrending.push(item.type)
                 }
             else{
-                return
+                return{}
             }
+            return{}
         })
 
     // all types filtered
@@ -106,8 +109,9 @@ const Navbar = ({usedata}) => {
                 filteredbyshop.push(item.type)
                 }
             else{
-                return
+                return{}
             }
+            return{}
         })
 
     useLayoutEffect(() => {
@@ -184,6 +188,46 @@ const Navbar = ({usedata}) => {
                                     <li onClick={() => CloseSideMenu()} >
                                         <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/viewall`}>View All</NavLink>
                                     </li>
+                                    {
+                                        useshopby.shopbyLink === "newarrival" ? (
+                                            filterednewarr.sort().map(item => {
+                                                return(
+                                                    <li onClick={() => CloseSideMenu()} >
+                                                        <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
+                                                    </li>
+                                                )
+                                            })
+                                        )
+                                        :
+                                        (
+                                            useshopby.shopbyLink === "trending" ? (
+                                                filteredtrending.sort().map(item => {
+                                                    return(
+                                                        <li onClick={() => CloseSideMenu()} >
+                                                            <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
+                                                        </li>
+                                                    )
+                                                })
+                                            )
+                                            :
+                                            (
+                                                useshopby.shopbyLink === "all" ? (
+                                                    filteredbyshop.sort().map(item => {
+                                                        return(
+                                                            <li onClick={() => CloseSideMenu()} >
+                                                                <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
+                                                            </li>
+                                                        )
+                                                    })
+                                                )
+                                                :
+                                                (
+                                                    console.log("error finding")
+                                                )
+                                            )
+                                        )
+                                        
+                                    }
                                 </ul>
 
                         </div>
