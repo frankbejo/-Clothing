@@ -211,19 +211,14 @@ const Navbar = ({usedata}) => {
                                             )
                                             :
                                             (
-                                                useshopby.shopbyLink === "all" ? (
-                                                    filteredbyshop.sort().map(item => {
-                                                        return(
-                                                            <li onClick={() => CloseSideMenu()} >
-                                                                <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
-                                                            </li>
-                                                        )
-                                                    })
-                                                )
-                                                :
-                                                (
-                                                    console.log("error finding")
-                                                )
+                                                filteredbyshop.sort().map(item => {
+                                                    return(
+                                                        <li onClick={() => CloseSideMenu()} >
+                                                            <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
+                                                        </li>
+                                                    )
+                                                })
+                                                
                                             )
                                         )
                                         
