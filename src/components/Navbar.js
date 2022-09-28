@@ -189,8 +189,8 @@ const Navbar = (props) => {
                                 </ul>
 {/* ----------------------------show viewby side menu */}
                                 <ul className={`side-menu-viewby ${isMenuVisible.viewby ? "show":""}`}>
-                                    <li onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, viewby: false}))}>
-                                        <ArrowBack /> <b>{useshopby.shopbyName}</b>
+                                    <li >
+                                        <ArrowBack onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, viewby: false}))} /> <b>{useshopby.shopbyName}</b>
                                         <span onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, shopby: false, viewby: false}))}>Back</span>
                                     </li>
                                     <li onClick={() => CloseSideMenu()} >
