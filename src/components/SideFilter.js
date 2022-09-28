@@ -88,7 +88,7 @@ export const SideFilter = (props) => {
                                         </li>
 
                                         <li>
-                                            <span className="side-filter-header">Trending Now</span>
+                                            <span className="side-filter-header">Trending</span>
                                             <ul className="side-filter-items">
                                                 <li>
                                                     <NavLink to={`/products/${categoryLabel}/trending/viewall`}>View All</NavLink>
@@ -106,7 +106,7 @@ export const SideFilter = (props) => {
                                         </li>
 
                                         <li>
-                                            <span className="side-filter-header">Shop by Products</span>
+                                            <span className="side-filter-header">Categories</span>
                                             <ul className="side-filter-items">
                                                 <li>
                                                     <NavLink to={`/products/${categoryLabel}/all/viewall`}>View All</NavLink>

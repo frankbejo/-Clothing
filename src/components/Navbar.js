@@ -175,11 +175,11 @@ const Navbar = (props) => {
                                         <span>Back</span>
                                     </li>
                                     <li onClick={() => GetCategoryForViewBy("all", "By Products")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
-                                        <span>Shop By Products</span>
+                                        <span>Categories</span>
                                         <NavigateNext />
                                     </li>
                                     <li onClick={() => GetCategoryForViewBy("trending", "Trending Now")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
-                                        <span>Trending Now</span>
+                                        <span>Trending</span>
                                         <NavigateNext />
                                     </li>
                                     <li onClick={() => GetCategoryForViewBy("newarrival","New Arrival")} className={usecategory === categoryLabel & shopby === "newarrival" ? "active":""}>
@@ -191,7 +191,7 @@ const Navbar = (props) => {
                                 <ul className={`side-menu-viewby ${isMenuVisible.viewby ? "show":""}`}>
                                     <li onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, viewby: false}))}>
                                         <ArrowBack /> <b>{useshopby.shopbyName}</b>
-                                        <span>Back</span>
+                                        <span onClick={() => setIsMenuVisible((isMenuVisible) => ({...isMenuVisible, shopby: false, viewby: false}))}>Back</span>
                                     </li>
                                     <li onClick={() => CloseSideMenu()} >
                                         <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/viewall`}>View All</NavLink>
@@ -331,7 +331,7 @@ const Navbar = (props) => {
                                             }
                                         </ul>
                                         <ul className="trendingnew">
-                                            <li><span>Trending Now</span></li>
+                                            <li><span>Trending</span></li>
                                             <li onClick={() => setdroponhover(false)}>
                                                 <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
                                             </li>
@@ -346,7 +346,7 @@ const Navbar = (props) => {
                                             }
                                         </ul>
                                         <ul className="byproducts">
-                                            <li><span>Shop by Products</span></li>
+                                            <li><span>Categories</span></li>
                                             <li onClick={() => setdroponhover(false)}>
                                                 <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
                                             </li>
