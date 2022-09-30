@@ -174,18 +174,39 @@ const Navbar = (props) => {
                                         <ArrowBack /> <b>{usecategory.charAt(0).toUpperCase() + usecategory.slice(1, )}</b>
                                         <span>Back</span>
                                     </li>
-                                    <li onClick={() => GetCategoryForViewBy("all", "By Products")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
-                                        <span>Categories</span>
-                                        <NavigateNext />
-                                    </li>
-                                    <li onClick={() => GetCategoryForViewBy("trending", "Trending Now")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
-                                        <span>Trending</span>
-                                        <NavigateNext />
-                                    </li>
-                                    <li onClick={() => GetCategoryForViewBy("newarrival","New Arrival")} className={usecategory === categoryLabel & shopby === "newarrival" ? "active":""}>
-                                        <span>New Arrival</span>
-                                        <NavigateNext />
-                                    </li>
+                                    {
+                                        filteredbyshop.length === 0 ? (
+                                            (null)
+                                        ):
+                                        (
+                                            <li onClick={() => GetCategoryForViewBy("all", "By Products")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
+                                                <span>Categories</span>
+                                                <NavigateNext />
+                                            </li>
+                                        )
+                                    }
+                                    {
+                                        filteredtrending.length === 0 ? (
+                                            (null)
+                                        ):
+                                        (
+                                            <li onClick={() => GetCategoryForViewBy("trending", "Trending Now")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
+                                                <span>Trending</span>
+                                                <NavigateNext />
+                                            </li>
+                                        )
+                                    }
+                                    {
+                                        filterednewarr.length === 0 ? (
+                                            (null)
+                                        ):
+                                        (
+                                            <li onClick={() => GetCategoryForViewBy("newarrival","New Arrival")} className={usecategory === categoryLabel & shopby === "newarrival" ? "active":""}>
+                                                <span>New Arrival</span>
+                                                <NavigateNext />
+                                            </li>
+                                        )
+                                    }
                                 </ul>
 {/* ----------------------------show viewby side menu */}
                                 <ul className={`side-menu-viewby ${isMenuVisible.viewby ? "show":""}`}>
@@ -315,11 +336,16 @@ const Navbar = (props) => {
                                     ):
                                     (
                                         <div className="top-menus"> 
-                                        <ul className="newarrival">
-                                            <li><span>New Arrival</span></li>
-                                            <li onClick={() => setdroponhover(false)}>
-                                                <NavLink to={`/products/${usecategory}/newarrival/viewall`} >View All</NavLink>
-                                            </li>
+                                        {
+                                            filterednewarr.length === 0 ? (
+                                                (null)
+                                            ):
+                                            (
+                                                <ul className="newarrival">
+                                                    <li><span>New Arrival</span></li>
+                                                    <li onClick={() => setdroponhover(false)}>
+                                                    <NavLink to={`/products/${usecategory}/newarrival/viewall`} >View All</NavLink>
+                                                    </li>
                                             {
                                                 filterednewarr.sort().map((item, index) => {
                                                     return(
@@ -330,11 +356,19 @@ const Navbar = (props) => {
                                                 })
                                             }
                                         </ul>
-                                        <ul className="trendingnew">
-                                            <li><span>Trending</span></li>
-                                            <li onClick={() => setdroponhover(false)}>
-                                                <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
-                                            </li>
+                                            )
+                                        }
+                                        
+                                        {
+                                            filteredtrending.length === 0 ? (
+                                                (null)
+                                            ):
+                                            (
+                                                <ul className="trendingnew">
+                                                    <li><span>Trending</span></li>
+                                                    <li onClick={() => setdroponhover(false)}>
+                                                    <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
+                                                    </li>
                                             {
                                                 filteredtrending.sort().map((item, index) => {
                                                     return(
@@ -345,11 +379,19 @@ const Navbar = (props) => {
                                                 })
                                             }
                                         </ul>
-                                        <ul className="byproducts">
-                                            <li><span>Categories</span></li>
-                                            <li onClick={() => setdroponhover(false)}>
-                                                <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
-                                            </li>
+                                            )
+                                        }
+                                        
+                                        {
+                                            filteredbyshop.length === 0 ? (
+                                                (null)
+                                            ):
+                                            (
+                                                <ul className="byproducts">
+                                                    <li><span>Categories</span></li>
+                                                    <li onClick={() => setdroponhover(false)}>
+                                                    <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
+                                                    </li>
                                             {
                                                 filteredbyshop.sort().map((item, index) => {
                                                     return(
@@ -361,6 +403,9 @@ const Navbar = (props) => {
                                             }
                                             
                                         </ul>
+                                            )
+                                        }
+                                        
                             </div>
                                     )
                                 )
