@@ -356,7 +356,7 @@ export const StyledNavbar = styled.div`
         font-weight: bold;
     }
 
-    .top-menus li a{
+    .top-menus li{
         font-size: 13px;
         font-weight: 300;
     }
@@ -443,6 +443,7 @@ export const StyledNavbar = styled.div`
     .top-menus ul{
         display: flex;
         flex-direction: column;
+        gap: 2px;
     }
 
     .top-menus ul li{
@@ -589,6 +590,8 @@ export const StyledNavbar = styled.div`
 
         .side-menu-list li{
             display: flex;
+            height: 60px;
+            width: 100%;
             justify-content: space-between;
             align-items: center;
         }
@@ -599,7 +602,7 @@ export const StyledNavbar = styled.div`
             padding: 20px;
         }
 
-        .side-menu-list li span{
+        .side-menu-list li span, b{
             height: 60px;
             padding: 20px;
         }
@@ -634,6 +637,14 @@ export const StyledNavbar = styled.div`
         .side-menu-list li.active:hover{
             color: ${(props) => props.theme.body};
             background-color: ${(props) => props.theme.fontColor};
+        }
+
+        .side-menu-viewby li svg, span{
+            cursor: pointer
+        }
+
+        .side-menu-viewby li svg, span:hover{
+            font-weight: bold;
         }
     }
 `;
@@ -931,6 +942,7 @@ export const StyledProducts = styled.div`
 export const StyledSingleProduct = styled.div`
     display: flex;
     justify-content: center;
+    width: 100%;
 
     span{
         font-size: 13px;
@@ -999,14 +1011,53 @@ export const StyledSingleProduct = styled.div`
         font-weight: bold;
     }
 
-    @media screen and (max-width: 1065px) {
+    @media screen and (max-width: 1055px) {
+        .item{
+            width: 100%;
+        }
+
+        .cover{
+            flex-direction: column;
+        }
+
+    }
+
+
+
+    @media screen and (max-width: 769px) {
         .item{
             width: 100%;
             flex-direction: column;
         }
 
+        .cover{
+            flex-direction: row;
+        }
+
         .info-container{
             width: 100%;
         }
+    }
+
+    @media screen and (max-width: 635px) {
+        .item{
+            width: 100%;
+            flex-direction: column;
+        }
+
+        
+
+    }
+
+    @media screen and (max-width: 400px) {
+        .cover{
+            flex-direction: column;
+        }
+
+        .item{
+            flex-direction: column-reverse;
+        }
+
+        
     }
 `;

@@ -1,10 +1,16 @@
 import { Item } from "./Item";
 import { useParams } from "react-router-dom";
 import FilterThis from "../components/FilterThis";
+import { useEffect, useState } from "react";
 
 export const ProductsContainer = (props) => {
     const { viewby } = useParams()
     const {filterdata, passeddata, refreshPage, isError} = props;
+    const [hasError, setHasError] = useState(false)
+
+    useEffect(() => {
+        setHasError(isError)
+    }, [isError])
     return(
         <>
                 <div className="filter">
@@ -15,7 +21,7 @@ export const ProductsContainer = (props) => {
                         </div>
                     </div>
             {
-                isError ? 
+                hasError ? 
                 (
                     <h2 onClick={() => refreshPage()}>Try again</h2>
                 )

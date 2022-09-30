@@ -40,7 +40,7 @@ export const Products = (props) => {
                 break;
     
                 default:
-                    setfilterdata(null);
+                    setfilterdata(filterCategory);
             }
         }
         FilterByShop()
