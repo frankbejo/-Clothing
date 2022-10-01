@@ -727,6 +727,7 @@ export const StyledProducts = styled.div`
         top: 0;   
         min-width: 170px;
         height: 100%;
+        max-height: 97vh;
         background-color: ${props => props.theme.itembg};
         z-index: 0;
         border: 1px solid ${props => props.theme.fontColor};
@@ -953,31 +954,33 @@ export const StyledSingleProduct = styled.div`
         color: ${(props) => props.theme.fontColor};
     }
     .item{
-        width: 80%;
-        height: 100%;
         display: flex;
-        gap: 10px;
+        width: 100%;
+        height: 100%;
+        gap: 5px;
         justify-content: center;
     }
 
     .cover{
+        position: relative;
+        display: flex;
         width: 100%;
         height: 100%;
-        gap: 10px;
-        display: flex;
+        gap: 5px;
     }
     
-    .info{
+    /* .info{
         background-color: ${(props) => props.theme.itembg};
-    }
+    } */
 
     .single-image{
+        display: flex;
         width: 100%;
         height: 100%;
         position: relative;
         overflow: hidden;
+        object-fit: fill;
         border: 1px solid ${(props) => props.theme.fontColor};
-        aspect-ratio: 2.5/4;
     }
 
     .single-image img{
@@ -988,8 +991,9 @@ export const StyledSingleProduct = styled.div`
     }
 
     .info-container{
-        width: 300px;
+        width: 400px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         padding: 20px;
         background-color: ${(props) => props.theme.itembg};
@@ -998,7 +1002,11 @@ export const StyledSingleProduct = styled.div`
         position: sticky;
         top: 0;
         gap: 20px;
-        
+    }
+
+    .info-container .info-top{
+        display: flex;
+        justify-content: space-between;
     }
 
     .info-container .left{
@@ -1011,23 +1019,109 @@ export const StyledSingleProduct = styled.div`
         font-weight: bold;
     }
 
-    @media screen and (max-width: 1055px) {
-        .item{
-            width: 100%;
-        }
+    .add-to-cart{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
 
+    .add-to-cart .select .select-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 0 0 0 10px;
+        width: 100%;
+        background-color: ${(props) => props.theme.body};
+        color: ${(props) => props.theme.fontColor};
+        border: 1px solid ${(props) => props.theme.fontColor};
+    }
+
+    .add-to-cart .select .select-container span{
+        color: ${(props) => props.theme.fontColor};
+    }
+
+    .add-to-cart .select .select-container svg{
+        width: 30px;
+        height: 30px;
+        transition: rotate 200ms ease;
+    }
+
+    .add-to-cart .select .select-container.show svg{
+        rotate: 90deg;
+    }
+    
+    .add-to-cart .select .option-container{
+        position: relative;
+        width: 100%;
+    }
+    
+    .add-to-cart .select .option-container .optionlist{
+        display: flex;
+        position: absolute;
+        list-style: none;
+        width: 100%;
+        overflow: hidden;
+        height: 0;
+        transition: 200ms ease-in-out;
+        background-color: ${(props) => props.theme.itembg};
+    }
+
+    .add-to-cart .select .option-container .optionlist.show{
+        height: auto;
+    }
+
+    .add-to-cart .select .option-container .optionlist li{
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 30px;
+        padding: 10px;
+        background-color: ${(props) => props.theme.body};
+        border: 1px solid ${(props) => props.theme.fontColor};
+        border-top: none;
+    }
+
+    .add-to-cart .select .option-container .optionlist li:hover{
+        background-color: ${(props) => props.theme.fontColor};
+    }
+
+    .add-to-cart .select .option-container .optionlist li:hover span{
+        color: ${(props) => props.theme.body};
+    }
+
+    
+
+    .add-to-cart .select .option-container .optionlist li:not(:first-child){
+        border-left: none;
+    }
+
+    .add-to-cart .cart-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 30px;
+        background-color: ${(props) => props.theme.fontColor};
+        color: ${(props) => props.theme.body};
+    }
+
+    .add-to-cart .cart-button span{
+        color: ${(props) => props.theme.body};
+    }
+
+    
+    @media screen and (max-width: 1090px) {
         .cover{
             flex-direction: column;
         }
-
     }
 
-
-
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 800px) {
         .item{
-            width: 100%;
-            flex-direction: column;
+            flex-direction: column-reverse
         }
 
         .cover{
@@ -1039,25 +1133,13 @@ export const StyledSingleProduct = styled.div`
         }
     }
 
-    @media screen and (max-width: 635px) {
-        .item{
-            width: 100%;
-            flex-direction: column;
-        }
-
-        
-
-    }
-
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 460px) {
         .cover{
             flex-direction: column;
         }
 
-        .item{
-            flex-direction: column-reverse;
+        .info-container{
+            width: 100%;
         }
-
-        
     }
 `;

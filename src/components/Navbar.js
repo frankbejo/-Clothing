@@ -221,7 +221,7 @@ const Navbar = (props) => {
                                         useshopby.shopbyLink === "newarrival" ? (
                                             filterednewarr.sort().map(item => {
                                                 return(
-                                                    <li onClick={() => CloseSideMenu()} >
+                                                    <li onClick={() => CloseSideMenu()} key={`newarr${item}`}>
                                                         <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
                                                     </li>
                                                 )
@@ -232,7 +232,7 @@ const Navbar = (props) => {
                                             useshopby.shopbyLink === "trending" ? (
                                                 filteredtrending.sort().map(item => {
                                                     return(
-                                                        <li onClick={() => CloseSideMenu()} >
+                                                        <li onClick={() => CloseSideMenu()} key={`trendingnow${item}`}>
                                                             <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
                                                         </li>
                                                     )
@@ -242,7 +242,7 @@ const Navbar = (props) => {
                                             (
                                                 filteredbyshop.sort().map(item => {
                                                     return(
-                                                        <li onClick={() => CloseSideMenu()} >
+                                                        <li onClick={() => CloseSideMenu()} key={`category${item}`}>
                                                             <NavLink to={`/products/${usecategory}/${useshopby.shopbyLink}/${item.replace(" ", "").toLowerCase()}`}>{item}</NavLink>
                                                         </li>
                                                     )
@@ -349,13 +349,13 @@ const Navbar = (props) => {
                                             {
                                                 filterednewarr.sort().map((item, index) => {
                                                     return(
-                                                        <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                        <li onClick={() => setdroponhover(false)} key={`newarr${item}`}>
                                                             <NavLink to={`/products/${usecategory}/newarrival/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
                                                         </li>
                                                     )
                                                 })
                                             }
-                                        </ul>
+                                                </ul>
                                             )
                                         }
                                         
@@ -366,19 +366,19 @@ const Navbar = (props) => {
                                             (
                                                 <ul className="trendingnew">
                                                     <li><span>Trending</span></li>
-                                                    <li onClick={() => setdroponhover(false)}>
+                                                    <li onClick={() => setdroponhover(false)} >
                                                     <NavLink to={`/products/${usecategory}/trending/viewall`}>View All</NavLink>
                                                     </li>
                                             {
-                                                filteredtrending.sort().map((item, index) => {
+                                                filteredtrending.sort().map((item) => {
                                                     return(
-                                                        <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                        <li onClick={() => setdroponhover(false)} key={`trending${item}`}>
                                                             <NavLink to={`/products/${usecategory}/trending/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
                                                         </li>
                                                     )
                                                 })
                                             }
-                                        </ul>
+                                                </ul>
                                             )
                                         }
                                         
@@ -393,24 +393,21 @@ const Navbar = (props) => {
                                                     <NavLink to={`/products/${usecategory}/all/viewall`}>View All</NavLink>
                                                     </li>
                                             {
-                                                filteredbyshop.sort().map((item, index) => {
+                                                filteredbyshop.sort().map((item) => {
                                                     return(
-                                                        <li onClick={() => setdroponhover(false)} key={`${item.type}${index}`}>
+                                                        <li onClick={() => setdroponhover(false)} key={`byshop${item}`}>
                                                             <NavLink to={`/products/${usecategory}/all/${item.replace(" ", "").toLowerCase()}`} >{item}</NavLink>
                                                         </li>
                                                     )
                                                 })
                                             }
-                                            
-                                        </ul>
+                                                </ul>
                                             )
                                         }
-                                        
                             </div>
                                     )
                                 )
                             }
-                            
                         </div>
                 </StyledNavbar>
                 <Outlet/>
