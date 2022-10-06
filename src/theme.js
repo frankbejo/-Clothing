@@ -309,43 +309,33 @@ export const StyledNavbar = styled.div`
     }
 
     .botnav .menus .menu-list li{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 5px;
         padding-bottom: 0px;
         cursor: pointer;
     }
 
-    .menu-list li span{
-        padding-bottom: 5px;
+    .menu-list svg{
+        pointer-events: none;
+        position: absolute;
+        margin-top: 20px;
+        display: none;
     }
-    
+
     .menu-list .tohover{
         display: flex;
         border-bottom: none;
         justify-content: center;
     }
 
-    .menu-list .tohover.on-hover::after{
-        content: "";
-        position: absolute;
-        width: 10px;
-        height: 2px;
-        bottom: 0;
-        transform: rotate(-40deg);
-        margin-left: 5px;
-        pointer-events: none;
-        background-color: ${(props) => props.theme.fontColor};
+    .menu-list .tohover.on-hover svg{
+        display: block;
     }
 
-    .menu-list .tohover.on-hover::before{
-        content: "";
-        position: absolute;
-        width: 10px;
-        height: 2px;
-        bottom: 0;
-        transform: rotate(40deg);
-        margin-left: -5px;
-        pointer-events: none;
-        background-color: ${(props) => props.theme.fontColor};
+    .menu-list .tohover.show svg{
+        display: block;
     }
 
     .menu-list .active-menu{
@@ -662,9 +652,23 @@ export const StyledItem = styled.div`
     }
 
     .cover{
+        position: relative;
         aspect-ratio: 2 / 3;
         width: 100%;
         height: 100%;
+    }
+
+    .favorite{
+        position: absolute;
+        right: 0;
+        margin-right: 5px;
+        bottom: 5px;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .favorite svg path{
     }
 
     .cover img{
@@ -850,33 +854,109 @@ export const StyledProducts = styled.div`
 
     @keyframes rotatehand {
         0%{
-            transform: rotate(0deg)
+            transform: rotate(0deg);
         }
         100%{
-            transform: rotate(360deg)
+            transform: rotate(360deg);
         }
     }
 
     .filter{
         position: sticky;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         top: 0;
-        height: 46px;
-        padding:10px;
         margin-bottom: 5px;
+        padding: 0 5px;
         color: ${props => props.theme.fontColor};
         background-color: ${props => props.theme.itembg};
         border: 1px solid ${props => props.theme.fontColor};
         z-index: 1;
     }
 
-    .filter-function{
+    .filter-container{
         display: flex;
-        gap: 20px;
-        overflow: hidden;
+        gap: 10px;
     }
+
+    .filter-menu{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .filtername{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .filtername.rotatesvg svg{
+        rotate: 180deg;
+    }
+    
+    .filter-menu ul{
+        display: none;
+        flex-direction: column;
+        list-style: none;
+        position: absolute;
+        top: 29px;
+        left: -11px;
+        font-size: 13px;
+        height: 0%;
+        border: 1px solid ${props => props.theme.fontColor};
+        background-color: ${props => props.theme.itembg};
+    }
+
+    .filter-menu ul li{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding-left: 10px;
+    }
+
+    .inputlabel-container{
+        display: flex;
+    }
+
+    .filter-menu ul li label{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 200px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .inputlabel-container label span{
+        font-weight: 400;
+    }
+
+    .filter-menu ul li:hover{
+        background-color: ${props => props.theme.fontColor};
+        color: ${props => props.theme.itembg};
+    }
+
+    .filter-menu ul li:hover span{
+        color: ${props => props.theme.itembg};
+    }
+
+    .filter-menu .sortby-dropdown.show, .filter-menu .size-dropdown.show{
+        display: flex;
+        height: auto;
+    }
+
+    .filter-function{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+    }
+
+    /*  */
     /* media quiries------------------------------------------------------- */
         @media screen and (max-width: 2870px ) {
             .products-container{
@@ -1082,6 +1162,7 @@ export const StyledSingleProduct = styled.div`
         background-color: ${(props) => props.theme.body};
         border: 1px solid ${(props) => props.theme.fontColor};
         border-top: none;
+        cursor: pointer;
     }
 
     .add-to-cart .select .option-container .optionlist li:hover{

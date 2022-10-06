@@ -10,6 +10,9 @@ import { TopMenuSkeleton } from './TopMenuSkeleton';
 const Navbar = (props) => {
     const {usedata, haserror} = props;
     const {categoryLabel, shopby} = useParams();
+
+    const [usethisdata, setthisdata] = useState([]);
+
     // states
     const [theme, setTheme] = useState(true);
     
@@ -131,6 +134,10 @@ const Navbar = (props) => {
     useEffect(() => {
         setIsError(haserror)
     }, [haserror])
+
+    useEffect(() => {
+        setthisdata(usedata)
+    }, [usedata])
     return(
         <div>
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
@@ -179,7 +186,7 @@ const Navbar = (props) => {
                                             (null)
                                         ):
                                         (
-                                            <li onClick={() => GetCategoryForViewBy("all", "By Products")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
+                                            <li onClick={() => GetCategoryForViewBy("all", "Categories")} className={usecategory === categoryLabel & shopby === "all" ? "active":""}>
                                                 <span>Categories</span>
                                                 <NavigateNext />
                                             </li>
@@ -190,7 +197,7 @@ const Navbar = (props) => {
                                             (null)
                                         ):
                                         (
-                                            <li onClick={() => GetCategoryForViewBy("trending", "Trending Now")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
+                                            <li onClick={() => GetCategoryForViewBy("trending", "Trending")} className={usecategory === categoryLabel & shopby === "trending" ? "active":""}>
                                                 <span>Trending</span>
                                                 <NavigateNext />
                                             </li>
@@ -327,7 +334,7 @@ const Navbar = (props) => {
                                     <h1>Error</h1>
                                 ):
                                 (
-                                    usedata.length === 0 ? (
+                                    usethisdata.length === 0 ? (
                                         <div className="top-menus-skeleton">
                                             <TopMenuSkeleton />
                                             <TopMenuSkeleton />

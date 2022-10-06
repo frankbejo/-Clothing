@@ -1,5 +1,6 @@
 import { StyledItem } from '../theme';
 import { Link, useParams } from 'react-router-dom';
+import {FavoriteOutlined} from '@mui/icons-material';
 
 export const Item = (props) => {
     const params = useParams();
@@ -11,6 +12,9 @@ export const Item = (props) => {
                 <div className="item" >
                     <div className="cover">
                         <img src={props.product_image} alt={props.itemname} width="100%" height="100%"/>
+                        <div className="favorite">
+                            <FavoriteOutlined />
+                        </div>
                     </div>
                     <div className="lower-info">
                         <span>{props.itemname}</span><br />
