@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { StyledSingleProduct } from "../theme";
 import {FavoriteBorder, KeyboardArrowRight, ShoppingBagOutlined} from '@mui/icons-material';
@@ -15,18 +15,22 @@ const DropDownSelected = (text) => {
     setSelectText(text)
 }
 
+useEffect(() => {
+    window.scrollTo(0, 0)
+}, [itemid])
+
 return(
         <section className="single-item">
             {
                 usedata.filter((items) => items._id === itemid)
                 .map((item, index) => {
                 return <StyledSingleProduct>
-                <div className="item">
+                <div className="item" key={item._id+"singleproduct"}>
                     <div className="cover">
                         {
-                            item.product_image.map(image => {
+                            item.product_image.map((image, index) => {
                                 return(
-                                    <div className="single-image" key={item._id}>
+                                    <div className="single-image" key={`${item._id}${index}`}>
                                         <img src={image} alt={item.itemname} />
                                     </div>
                                 )
@@ -55,22 +59,20 @@ return(
                                     </div>
                                     <div className="option-container">
                                         <ul className={`optionlist ${isDropDown ? "show" : ""}`}>
-                                            <li onClick={() => DropDownSelected("S")}>
-                                                <span>S</span> 
-                                            </li>
-                                            <li onClick={() => DropDownSelected("M")}>
-                                                <span>M</span> 
-                                            </li>
-                                            <li onClick={() => DropDownSelected("L")}>
-                                                <span>L</span> 
-                                            </li>
-                                            <li onClick={() => DropDownSelected("XL")}>
-                                                <span>XL</span> 
-                                            </li>
-                                            <li onClick={() => DropDownSelected("XXL")}>
-                                                <span>XXL</span> 
-                                            </li>
-                                            
+                                            {
+                                                item.sizes ? (
+                                                    item.sizes.map(itemsize => {
+                                                            return <li onClick={() => DropDownSelected(`${itemsize.size}`)}>
+                                                            <span>{`${itemsize.size} : ${itemsize.dimension}in`}</span> 
+                                                            </li>
+                                                    })
+                                                ):
+                                                ( 
+                                                            <li onClick={() => DropDownSelected("Not available")}>
+                                                            <span>Not available</span> 
+                                                            </li>
+                                                )
+                                            }
                                         </ul>
                                     </div>
                                 </div>

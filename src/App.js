@@ -7,8 +7,10 @@ import {Products} from './pages/Products';
 import { SingleProduct } from "./pages/SingelProduct";
 import Navbar from "./components/Navbar";
 import { SearchedPage } from "./pages/SearchedPage";
+import { useParams } from "react-router-dom";
 
 function App() {
+  const {categoryLabel, shopby, viewby, itemid} = useParams();
   const [usedata, setusedata] = useState([]);
   const [haserror, sethaserror] = useState(false)
 
@@ -27,6 +29,10 @@ function App() {
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+}, [categoryLabel, shopby, viewby, itemid])
 
     
   

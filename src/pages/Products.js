@@ -26,6 +26,7 @@ export const Products = (props) => {
         const datenow = new Date()
 
         const FilterByShop = () => {
+            window.scrollTo(0, 0)
             switch(shopby){
                 case 'all':
                     setfilterdata(filterCategory);

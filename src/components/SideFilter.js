@@ -5,7 +5,8 @@ import { TopMenuSkeleton } from "./TopMenuSkeleton";
 
 export const SideFilter = (props) => {
     const {usedata, haserror} = props;
-    const [isError, setIsError] = useState([]);
+    const [isError, setIsError] = useState(false);
+    const [usethisdata, setthisdata] = useState([]);
     const params = useParams();
     const {categoryLabel} = params;
 
@@ -51,7 +52,9 @@ export const SideFilter = (props) => {
 
     useEffect(() => {
         setIsError(haserror)
-    }, [haserror])
+        setthisdata(usedata)
+    }, [haserror, usedata])
+    
     return(
                 <div className="side-nav">
                     {
@@ -59,7 +62,7 @@ export const SideFilter = (props) => {
                             <h1>Error</h1>
                         ):
                         (
-                            usedata.length === 0 ? (
+                            usethisdata.length === 0 ? (
                                 <div className="side-nav-fixed-skeleton">
                                     <TopMenuSkeleton />
                                     <TopMenuSkeleton />
