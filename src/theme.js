@@ -663,12 +663,10 @@ export const StyledItem = styled.div`
         right: 0;
         margin-right: 5px;
         bottom: 5px;
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
     }
 
     .favorite svg path{
+        color: white;
     }
 
     .cover img{
@@ -926,7 +924,7 @@ export const StyledProducts = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 200px;
+        width: 150px;
         padding: 10px;
         cursor: pointer;
     }
@@ -1100,8 +1098,9 @@ export const StyledSingleProduct = styled.div`
     }
 
     .add-to-cart{
+        width: 100%;
+        height: 100%;
         display: flex;
-        flex-direction: column;
         gap: 5px;
     }
 
@@ -1111,7 +1110,7 @@ export const StyledSingleProduct = styled.div`
         align-items: center;
         position: relative;
         padding: 0 0 0 10px;
-        width: 100%;
+        width: 200px;
         background-color: ${(props) => props.theme.body};
         color: ${(props) => props.theme.fontColor};
         border: 1px solid ${(props) => props.theme.fontColor};
@@ -1184,15 +1183,85 @@ export const StyledSingleProduct = styled.div`
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 30px;
+        height: 32px;
         background-color: ${(props) => props.theme.fontColor};
         color: ${(props) => props.theme.body};
+        transition: box-shadow 100ms ease-in-out;
+        cursor: pointer;
+    }
+
+    .add-to-cart .cart-button:hover{
+        box-shadow: 0px 0px 20px 2px ${(props) => props.theme.body};
     }
 
     .add-to-cart .cart-button span{
         color: ${(props) => props.theme.body};
     }
 
+    .isaddednotif{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: fixed;
+        gap: 5px;
+        bottom: 0;
+        left: 0;
+        margin: 0 0 -250px 10px;
+        z-index: 1000;
+        padding: 10px;
+        background-color: ${(props) => props.theme.itembg};
+        color: ${(props) => props.theme.fontColor};
+        border: 1px solid ${(props) => props.theme.fontColor};
+        transition: margin 100ms ease-in-out;
+    }
+
+    .isaddednotif.show{
+        margin-bottom: 10px;
+    }
+
+    .notif-message{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .notif-message .close{
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        background-color: ${(props) => props.theme.fontColor}99;
+    }
+
+    .notif-message .left{
+        display: flex;
+        align-items: center;
+        gap: 1px;
+    }
+
+    .notif-message svg{
+        width: 20px;
+        height: 20px;
+    }
+
+    .item-info{
+        display: flex;
+        gap: 10px;
+    }
+
+    .item-info .image-container img{
+        aspect-ratio: 4/4;
+        width: 100px;
+        object-fit: cover;
+    }
+
+    .added-item-info{
+        width: auto;
+        min-width: 150px;
+        display: flex;
+        flex-direction: column;
+    }
     
     @media screen and (max-width: 1090px) {
         .cover{
