@@ -1,4 +1,4 @@
-import {StyledCustomerService} from '../theme'
+import {StyledCustomerService} from '../theme';
 
 export const CustomerService = () => {
     return(

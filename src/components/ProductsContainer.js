@@ -3,10 +3,11 @@ import { Item } from "./Item";
 import { useParams } from "react-router-dom";
 import {KeyboardArrowDown, Tune} from '@mui/icons-material';
 
-
 export const ProductsContainer = (props) => {
     const { categoryLabel, shopby, viewby } = useParams()
     const {filterdata, refreshPage, isError} = props;
+
+    // use addtocart reducer from redux state
     const [filtereddata, setfiltereddata] = useState([])
     const [hasError, setHasError] = useState(false)
     const [isSortBy, setIsSortBy] = useState(false)
@@ -24,6 +25,7 @@ export const ProductsContainer = (props) => {
         else{
             return null
         }
+        return null
         })
 
     // filtersize
@@ -41,30 +43,29 @@ export const ProductsContainer = (props) => {
         }else{
             return null
         }
-
         return null
     })
 
     const SortBy = (sortname) => {
         switch(sortname){
             case 'recommended':
-                setfiltereddata(filterdata.sort((a, b) => new Date(a.created) - new Date(b.created)));
+                setfiltereddata(filtereddata.sort((a, b) => new Date(a.created) - new Date(b.created)));
                 setSelectedRadio("recommended")
                 break;
             case 'newest':
-                setfiltereddata(filterdata.sort((a, b) => new Date(b.created) - new Date(a.created)));
+                setfiltereddata(filtereddata.sort((a, b) => new Date(b.created) - new Date(a.created)));
                 setSelectedRadio("newest")
                 break;
             case 'highest':
-                setfiltereddata(filterdata.sort((a,b) => b.price - a.price))
+                setfiltereddata(filtereddata.sort((a,b) => b.price - a.price))
                 setSelectedRadio("highest")
                 break;
             case 'lowest':
-                setfiltereddata(filterdata.sort((a,b) => a.price - b.price))
+                setfiltereddata(filtereddata.sort((a,b) => a.price - b.price))
                 setSelectedRadio("lowest")
                 break;
             default: 
-                setfiltereddata(filterdata)
+                setfiltereddata(filtereddata)
                 }
         setIsSortBy(false)
     }
@@ -115,7 +116,7 @@ export const ProductsContainer = (props) => {
 
                                 <ul className={`size-dropdown ${isSize ? "show" : ""}`}>
                                     {
-                                        filteredsize.map(itemsize => {
+                                        filteredsize.map((itemsize, index) => {
                                             const sizecount = [];
                                             filtereddata.map(item => {
                                                 item.sizes.map(size => {
@@ -123,7 +124,7 @@ export const ProductsContainer = (props) => {
                                                 })
                                             })
                                             const size = sizecount.filter(item => item === itemsize)
-                                            return <li>
+                                            return <li key={`${itemsize}`}>
                                                         <div className="inputlabel-container">
                                                             <input type="checkbox" name="size" id={`${itemsize}`} />
                                                             <label htmlFor={`${itemsize}`}>
@@ -153,8 +154,8 @@ export const ProductsContainer = (props) => {
                                                     return (
                                                     <li key={`${item}${fitcount.length}`}>
                                                         <div className="inputlabel-container">
-                                                            <input type="checkbox" name="fit" id="regularfit" />
-                                                            <label htmlFor="regularfit">
+                                                            <input type="checkbox" name="fit" id={`${item.toLowerCase().replace(" ","")}`} />
+                                                            <label htmlFor={`${item.toLowerCase().replace(" ","")}`}>
                                                                 <span>{item}</span> 
                                                                 <span>{fitcount.length}</span> 
                                                             </label> 

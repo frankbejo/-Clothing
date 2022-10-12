@@ -6,22 +6,28 @@ import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
 import { MenuList } from './MenuList';
 import { TopMenuSkeleton } from './TopMenuSkeleton';
+import {useSelector} from 'react-redux';
 
 const Navbar = (props) => {
-    const {usedata, haserror} = props;
-    const {categoryLabel, shopby} = useParams();
+    const {usedata, haserror, fetchData} = props;
+    const {categoryLabel, shopby, viewby} = useParams();
+
+    // redux state
+    const cart = useSelector((state) => state.cart.cart)
+    const favorites = useSelector((state) => state.favorites.favorites)
+    console.log(favorites)
 
     const [usethisdata, setthisdata] = useState([]);
 
     // states
     const [theme, setTheme] = useState(true);
-    
+
     // skeleton when loading
     const [isError, setIsError] = useState(false)
 
     // droponhover state / animation state
     const [droponhover, setdroponhover ] = useState(false)
-    
+
     // category state for navbar
     const [usecategory, setcategory] = useState("");
     const [useshopby, setshopby] = useState(
@@ -50,6 +56,7 @@ const Navbar = (props) => {
             viewby: false
         }))
     }
+
     // function for category to shopby : side menu
     const GetCategoryForShopBy = (category) => {
         setcategory(category)
@@ -92,7 +99,6 @@ const Navbar = (props) => {
             else{
                 return{}
             }
-
             return{}
         })
     
@@ -138,6 +144,11 @@ const Navbar = (props) => {
     useEffect(() => {
         setthisdata(usedata)
     }, [usedata])
+
+    useEffect(() => {
+        fetchData()
+    },[categoryLabel, shopby, viewby])
+
     return(
         <div>
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
@@ -260,7 +271,6 @@ const Navbar = (props) => {
                                         
                                     }
                                 </ul>
-
                         </div>
                         <div className="backdrop" onClick={CloseSideMenu}></div>
                         </div>
@@ -315,7 +325,7 @@ const Navbar = (props) => {
                                 <div id="shoppingbag">
                                     <ShoppingBagOutlined />
                                     <span>Shopping bag</span> 
-                                    (10)
+                                    ({cart.length})
                                 </div>
                             </div>
                         </div>
