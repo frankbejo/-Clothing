@@ -7,10 +7,10 @@ import {Products} from './pages/Products';
 import { SingleProduct } from "./pages/SingelProduct";
 import Navbar from "./components/Navbar";
 import { SearchedPage } from "./pages/SearchedPage";
-import { useParams } from "react-router-dom";
+import {store} from './store/store';
+import {Provider} from 'react-redux';
 
 function App() {
-  const {categoryLabel, shopby, viewby, itemid} = useParams();
   const [usedata, setusedata] = useState([]);
   const [haserror, sethaserror] = useState(false)
 
@@ -25,21 +25,15 @@ function App() {
     }
   } 
 
-
   useEffect(() => {
     fetchData()
   }, [])
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-}, [categoryLabel, shopby, viewby, itemid])
-
-    
-  
   return (
     <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<Navbar usedata={usedata} haserro={haserror}/>}>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<Navbar usedata={usedata} haserro={haserror} fetchData={fetchData}/> }>
           <Route index element={<Home />} />
           <Route path="search" element={<SearchedPage />} />
           <Route path="customerservice" element={<CustomerService />} />
@@ -48,6 +42,7 @@ function App() {
           <Route path="*" element={<Error />}/>
         </Route>
       </Routes>
+    </Provider>
     </BrowserRouter>
     
   );
