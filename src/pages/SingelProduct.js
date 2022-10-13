@@ -119,7 +119,7 @@ return(
                                 <ShoppingBagOutlined />
                                 <span>Added to the bag</span>
                             </div>
-                            <div className="close">
+                            <div className="close" onClick={() => setIsAdded(false)}>
                                 <Close /> 
                             </div>
                         </div>
