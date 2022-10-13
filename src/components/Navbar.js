@@ -15,7 +15,6 @@ const Navbar = (props) => {
     // redux state
     const cart = useSelector((state) => state.cart.cart)
     const favorites = useSelector((state) => state.favorites.favorites)
-    console.log(favorites)
 
     const [usethisdata, setthisdata] = useState([]);
 
@@ -326,6 +325,45 @@ const Navbar = (props) => {
                                     <ShoppingBagOutlined />
                                     <span>Shopping bag</span> 
                                     ({cart.length})
+                                    <div className="shoppingbag-onhover">
+                                        <div className="shoppingbag-container">
+                                            <span></span>
+                                            <ul>
+                                            {
+                                                cart.length === 0 ? (
+                                                    <span>Bag is Empty</span>
+                                                ):
+                                                (
+                                                    cart.map(item => {
+                                                        return(
+                                                            <>
+                                                                <li>
+                                                                <div className="image-container">
+                                                                    <img src={item.product_image} alt="" />
+                                                                </div>
+                                                                <div className="item-info-container">
+                                                                    <div className="item-info">
+                                                                        <span><b>{item.itemname}</b></span>
+                                                                        <span>{item.fit}</span>
+                                                                        <span>Size: {item.sizes[0].size}</span>
+                                                                    </div>
+                                                                    <div className="price">
+                                                                        <span>PHP{item.price}</span>
+                                                                        <span>{item.price}.00</span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <hr />
+                                                            </>
+                                                            
+                                                        )
+                                                    })
+                                                    
+                                                )
+                                            }
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

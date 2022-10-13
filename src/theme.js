@@ -482,7 +482,59 @@ export const StyledNavbar = styled.div`
         display: none;
     }
 
-    
+    #shoppingbag .shoppingbag-onhover{
+        display: none;
+        right: 20px;
+        top: 60px;
+        padding-top: 5px;
+        position: absolute;
+    }
+
+    #shoppingbag .shoppingbag-onhover .shoppingbag-container{
+        width: 300px;
+        max-height: 400px;
+        background-color: ${(props) => props.theme.itembg};
+        border: 1px solid ${(props) => props.theme.fontColor};
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+    }
+
+    .shoppingbag-container li{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .shoppingbag-container .image-container img{
+        aspect-ratio: 4/4;
+        width: 100px;
+        object-fit: cover;
+    }
+
+    .shoppingbag-container .item-info-container{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .shoppingbag-container li .item-info-container .item-info{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .shoppingbag-container li .item-info-container .price{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #shoppingbag:hover .shoppingbag-onhover{
+        display: flex;
+    }
 
     @media screen and (max-width: 1024px){
         .botnav{
