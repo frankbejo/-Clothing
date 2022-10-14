@@ -16,7 +16,7 @@ function App() {
 
   const fetchData = async () => {
     try{
-      const res = await fetch("http://localhost:5000/products")
+      const res = await fetch(process.env.REACT_APP_WEB_API_KEY)
       const data = await res.json()
       setusedata(data)
     }
