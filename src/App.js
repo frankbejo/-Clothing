@@ -15,6 +15,7 @@ function App() {
   const [haserror, sethaserror] = useState(false)
 
   const fetchData = async () => {
+    
     try{
       const res = await fetch("https://test-server-side-api.herokuapp.com/products")
       const data = await res.json()
