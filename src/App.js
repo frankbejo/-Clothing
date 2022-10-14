@@ -1,43 +1,48 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Error } from "./components/Error";
-import { Home } from "./components/Home";
-import { CustomerService } from "./components/CustomerService";
-import {Products} from './components/Products';
-import { SingleProduct } from "./components/SingelProduct";
+import { Error } from "./pages/Error";
+import { Home } from "./pages/Home";
+import { CustomerService } from "./pages/CustomerService";
+import {Products} from './pages/Products';
+import { SingleProduct } from "./pages/SingelProduct";
 import Navbar from "./components/Navbar";
-// import axios from "axios";
-import SideFilter from "./components/SideFilter";
-import {products} from '../src/data';
-
-// const {REACT_APP_URL_KEY} = process.env.REACT_APP_URL_KEY;
+import { SearchedPage } from "./pages/SearchedPage";
+import {store} from './store/store';
+import {Provider} from 'react-redux';
 
 function App() {
-  const [usedata, setusedata] = useState([products]);
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/products")
-  //   .then(res => {
-  //     setusedata(res.data)
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
-    
-  // }, [])
+  const [usedata, setusedata] = useState([]);
+  const [haserror, sethaserror] = useState(false)
+
+  const fetchData = async () => {
+    try{
+      const res = await fetch("https://test-server-side-api.herokuapp.com/products")
+      const data = await res.json()
+      setusedata(data)
+    }
+    catch(e){
+      sethaserror(true)
+    }
+  } 
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<Navbar />}>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<Navbar usedata={usedata} haserro={haserror} fetchData={fetchData}/> }>
           <Route index element={<Home />} />
+          <Route path="search" element={<SearchedPage />} />
           <Route path="customerservice" element={<CustomerService />} />
-          <Route path="products/:categoryLabel/:shopby/:viewby" element={<SideFilter usedata={usedata} />}>
-            <Route index element={<Products usedata={usedata}/>} />
-          </Route>
+          <Route path="products/:categoryLabel/:shopby/:viewby" element={<Products usedata={usedata} haserror={haserror}/>} />
           <Route path="products/:categoryLabel/:shopby/:viewby/:itemid/:itemname" element={<SingleProduct usedata={usedata}/>} />
           <Route path="*" element={<Error />}/>
         </Route>
       </Routes>
+    </Provider>
     </BrowserRouter>
     
   );
