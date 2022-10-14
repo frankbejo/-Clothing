@@ -12,6 +12,8 @@ const Navbar = (props) => {
     const {usedata, haserror, fetchData} = props;
     const {categoryLabel, shopby, viewby} = useParams();
 
+    let totalprice = 0;
+
     // redux state
     const cart = useSelector((state) => state.cart.cart)
     const favorites = useSelector((state) => state.favorites.favorites)
@@ -335,8 +337,9 @@ const Navbar = (props) => {
                                                 ):
                                                 (
                                                     cart.map(item => {
+                                                        totalprice += item.price;
                                                         return(
-                                                            <>
+                                                            <NavLink to={`/products/${item.category}/all/viewall/${item._id}/${item.itemname}`}>
                                                                 <li>
                                                                 <div className="image-container">
                                                                     <img src={item.product_image} alt="" />
@@ -353,15 +356,20 @@ const Navbar = (props) => {
                                                                     </div>
                                                                 </div>
                                                             </li>
-                                                            <hr />
-                                                            </>
-                                                            
+                                                            </NavLink>
                                                         )
                                                     })
-                                                    
                                                 )
                                             }
                                             </ul>
+                                            <div className="checkout">
+                                                <span>Checkout</span>
+                                                <NavigateNext />
+                                            </div>
+                                            <div className="total">
+                                                <span><b>Total</b></span>
+                                                <span>PHP{totalprice}.00</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

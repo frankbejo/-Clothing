@@ -497,7 +497,26 @@ export const StyledNavbar = styled.div`
         border: 1px solid ${(props) => props.theme.fontColor};
         overflow-y: scroll;
         overflow-x: hidden;
+    }
 
+    .shoppingbag-onhover .shoppingbag-container .total{
+        position: sticky;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: ${(props) => props.theme.itembg};
+    }
+
+    .shoppingbag-onhover .shoppingbag-container .checkout{
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px;
+        padding: 10px;
+        background-color: ${(props) => props.theme.fontColor};
+        color: ${(props) => props.theme.body};
     }
 
     .shoppingbag-container li{
@@ -530,6 +549,7 @@ export const StyledNavbar = styled.div`
         display: flex;
         width: 100%;
         justify-content: space-between;
+        border-bottom: 1px solid ${(props) => props.theme.fontColor};
     }
 
     #shoppingbag:hover .shoppingbag-onhover{
