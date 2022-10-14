@@ -16,7 +16,7 @@ const Navbar = (props) => {
 
     // redux state
     const cart = useSelector((state) => state.cart.cart)
-    // const favorites = useSelector((state) => state.favorites.favorites)
+    const favorites = useSelector((state) => state.favorites.favorites)
 
     const [usethisdata, setthisdata] = useState([]);
 
