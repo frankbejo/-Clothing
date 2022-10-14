@@ -1,4 +1,12 @@
-import {StyledCustomerService} from '../theme';
+import styled from "styled-components"
+
+const StyledCustomerService = styled.div`
+    section{
+        height: 1000px;
+        color: white;
+    }
+    
+`;
 
 export const CustomerService = () => {
     return(
