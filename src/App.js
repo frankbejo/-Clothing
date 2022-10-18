@@ -10,6 +10,7 @@ import { SearchedPage } from "./pages/SearchedPage";
 import {store} from './store/store';
 import {Provider} from 'react-redux';
 
+
 function App() {
   const [usedata, setusedata] = useState([]);
   const [haserror, sethaserror] = useState(false)
@@ -24,10 +25,6 @@ function App() {
       sethaserror(true)
     }
   } 
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   return (
     <BrowserRouter>

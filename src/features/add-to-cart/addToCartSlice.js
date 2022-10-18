@@ -12,10 +12,15 @@ export const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             state.cart.push(action.payload)
+        },
+        setItems: (state, action) => {
+            return {
+                cart: action.payload
+            }
         }
     }
 })
 
-export const {addItem} = cartSlice.actions;
+export const {addItem, setItems} = cartSlice.actions;
 
 export default cartSlice.reducer;

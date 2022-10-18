@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { StyledSingleProduct } from "../theme";
 import {FavoriteBorder, KeyboardArrowRight, ShoppingBagOutlined, Close} from '@mui/icons-material';
 import {useSelector, useDispatch} from 'react-redux';
-import {addItem} from '../features/add-to-cart/addToCartSlice';
+import {addItem, cartSlice} from '../features/add-to-cart/addToCartSlice';
 
 export const SingleProduct = (props) => {
 const params  = useParams();    
@@ -18,6 +18,7 @@ const dispatch = useDispatch();
 
 // added notif state
 const [isAdded, setIsAdded] = useState(false);
+
 // is already added notif state
 const [isAlreadyAdded, setIsAlreadyAdded] = useState(false) ;
 
@@ -29,21 +30,30 @@ const AddToCart = (item) => {
         setTimeout(() => {
         setIsAdded(false)
         },[5000])
+        
     }else{
         setIsAlreadyAdded(true)
     }
 }
 
-const DropDownSelected = (text) => {
-    setIsDropDown(false)
-    setSelectText(text)
-}
+    const DropDownSelected = (text) => {
+        setIsDropDown(false)
+        setSelectText(text)
+    }
 
-useEffect(() => {
-    window.scrollTo(0, 0)
-    setSelectText({})
-}, [itemid])
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        setSelectText({})
+    }, [itemid])
 
+    useEffect(() => {
+        if(cart.length === 0){
+            return
+        }else{
+            console.log(cart)
+            window.localStorage.setItem("cart", JSON.stringify(cart))
+        }
+    }, [cart])
 
 return(
         <section className="single-item">

@@ -451,7 +451,7 @@ export const StyledNavbar = styled.div`
         position: relative;
         width: 50px;
         height: 50px;
-        z-index: -1
+        z-index: -1;
     }
 
     .search{
@@ -522,6 +522,7 @@ export const StyledNavbar = styled.div`
         width: 100%;
         height: 100%;
         padding: 10px;
+        padding-bottom: 0;
         gap: 5px;
     }
 
@@ -552,6 +553,11 @@ export const StyledNavbar = styled.div`
 
     #shoppingbag:hover .shoppingbag-onhover{
         display: flex;
+    }
+
+    .shoppingbag-container .emptybag{
+        padding: 10px;
+        border-bottom: 1px solid ${(props) => props.theme.fontColor};
     }
 
     @media screen and (max-width: 1024px){

@@ -6,17 +6,18 @@ import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
 import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
 import { MenuList } from './MenuList';
 import { TopMenuSkeleton } from './TopMenuSkeleton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { setItems } from '../features/add-to-cart/addToCartSlice';
 
 const Navbar = (props) => {
-    const {usedata, haserror, fetchData} = props;
-    const {categoryLabel, shopby, viewby} = useParams();
-
-    let totalprice = 0;
-
     // redux state
     const cart = useSelector((state) => state.cart.cart)
-    const favorites = useSelector((state) => state.favorites.favorites)
+    const dispatch = useDispatch();
+    const {usedata, haserror, fetchData} = props;
+    const {categoryLabel, shopby, viewby} = useParams()
+
+    let totalprice = 0;
+    // const favorites = useSelector((state) => state.favorites.favorites)
 
     const [usethisdata, setthisdata] = useState([]);
 
@@ -145,10 +146,15 @@ const Navbar = (props) => {
     useEffect(() => {
         setthisdata(usedata)
     }, [usedata])
-
+    
     useEffect(() => {
         fetchData()
-    },[categoryLabel, shopby, viewby])
+        if(!window.localStorage.getItem("cart")){
+            window.localStorage.setItem("cart", JSON.stringify(cart))
+        }else{
+            dispatch(setItems(JSON.parse(window.localStorage.getItem("cart"))))
+        }
+    },[])
 
     return(
         <div>
@@ -330,13 +336,18 @@ const Navbar = (props) => {
                                     <div className="shoppingbag-onhover">
                                         <div className="shoppingbag-container">
                                             <span></span>
-                                            <ul>
+                                            
                                             {
                                                 cart.length === 0 ? (
-                                                    <span>Bag is Empty</span>
+                                                    <div className="emptybag">
+                                                        <span>Bag is Empty</span>
+                                                    </div>
                                                 ):
                                                 (
-                                                    cart.map(item => {
+                                                    <>
+                                                    <ul>
+                                                        {
+                                                        cart.map(item => {
                                                         totalprice += item.price;
                                                         return(
                                                             <NavLink to={`/products/${item.category}/all/viewall/${item._id}/${item.itemname}`}>
@@ -359,17 +370,20 @@ const Navbar = (props) => {
                                                             </NavLink>
                                                         )
                                                     })
+                                                    }
+                                                    </ul>
+                                                    <div className="checkout">
+                                                        <span>Checkout</span>
+                                                        <NavigateNext />
+                                                    </div>
+                                                    <div className="total">
+                                                        <span><b>Total</b></span>
+                                                        <span>PHP{totalprice}.00</span>
+                                                    </div>
+                                                    </>
+                                                    
                                                 )
                                             }
-                                            </ul>
-                                            <div className="checkout">
-                                                <span>Checkout</span>
-                                                <NavigateNext />
-                                            </div>
-                                            <div className="total">
-                                                <span><b>Total</b></span>
-                                                <span>PHP{totalprice}.00</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
