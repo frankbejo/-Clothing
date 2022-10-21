@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { StyledSingleProduct } from "../theme";
 import {FavoriteBorder, KeyboardArrowRight, ShoppingBagOutlined, Close} from '@mui/icons-material';
 import {useSelector, useDispatch} from 'react-redux';
-import {addItem, cartSlice} from '../features/add-to-cart/addToCartSlice';
+import {addItem} from '../features/add-to-cart/addToCartSlice';
 
 export const SingleProduct = (props) => {
 const params  = useParams();    
@@ -44,13 +44,13 @@ const AddToCart = (item) => {
     useEffect(() => {
         window.scrollTo(0, 0)
         setSelectText({})
+        setIsAdded(false)
     }, [itemid])
 
     useEffect(() => {
         if(cart.length === 0){
             return
         }else{
-            console.log(cart)
             window.localStorage.setItem("cart", JSON.stringify(cart))
         }
     }, [cart])
