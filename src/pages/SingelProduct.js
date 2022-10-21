@@ -4,6 +4,7 @@ import { StyledSingleProduct } from "../theme";
 import {FavoriteBorder, KeyboardArrowRight, ShoppingBagOutlined, Close} from '@mui/icons-material';
 import {useSelector, useDispatch} from 'react-redux';
 import {addItem} from '../features/add-to-cart/addToCartSlice';
+import Footer from "../components/Footer";
 
 export const SingleProduct = (props) => {
 const params  = useParams();    
@@ -46,27 +47,19 @@ const AddToCart = (item) => {
         setSelectText({})
         setIsAdded(false)
     }, [itemid])
-
-    useEffect(() => {
-        if(cart.length === 0){
-            return
-        }else{
-            window.localStorage.setItem("cart", JSON.stringify(cart))
-        }
-    }, [cart])
-
 return(
+    <StyledSingleProduct>
         <section className="single-item">
             {
                 usedata.filter((items) => items._id === itemid)
-                .map((item) => {
-                return <StyledSingleProduct>
-                <div className="item" key={item._id+"singleproduct"}>
+                .map((item, index) => {
+                return <>
+                <div className="item" key={`${item._id}${index}thisitem`}>
                     <div className="cover">
                         {
                             item.product_image.map((image, index) => {
                                 return(
-                                    <div className="single-image" key={`${item._id}${index}`}>
+                                    <div className="single-image" key={`${item._id}${index}productimage`}>
                                         <img src={image} alt={item.itemname} />
                                     </div>
                                 )
@@ -98,14 +91,14 @@ return(
                                         <ul className={`optionlist ${isDropDown ? "show" : ""}`}>
                                             {
                                                 item.sizes ? (
-                                                    item.sizes.map(itemsize => {
-                                                            return <li onClick={() => DropDownSelected(itemsize)}>
-                                                            <span>{`${itemsize.size}`}</span> 
+                                                    item.sizes.map((itemsize, index) => {
+                                                            return <li onClick={() => DropDownSelected(itemsize)} key={`${itemsize}${index}itemsize`}>
+                                                                <span>{`${itemsize.size}`}</span> 
                                                             </li>
                                                     })
                                                 ):
                                                 ( 
-                                                    <li onClick={() => DropDownSelected("Not available")}>
+                                                    <li onClick={() => DropDownSelected("Not available")} key={"notavailable"}>
                                                     <span>Not available</span> 
                                                     </li>
                                                 )
@@ -146,10 +139,11 @@ return(
                             </div>
                         </div>
                     </div>
-                </StyledSingleProduct>
+                </>
                 })
             }
-            
         </section>
+        <Footer />
+        </StyledSingleProduct>
     )
 }

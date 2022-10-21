@@ -2,6 +2,7 @@ import { HomeStyled } from '../theme';
 import { NavLink } from 'react-router-dom';
 import img1 from '../images/img1.jpg';
 import img3 from '../images/img3.jpg';
+import Footer from '../components/Footer';
 
 export const Home = () => {
 
@@ -25,8 +26,8 @@ export const Home = () => {
                     <img src={img1} alt="" />
                 </div>
             </div>
-            
         </section>
+        <Footer />
         </HomeStyled>
     )
 }

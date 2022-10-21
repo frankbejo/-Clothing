@@ -45,6 +45,20 @@ section span{
     color: ${(props) => props.theme.fontColor};
 }
 
+.breadcrumbs{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.breadcrumbs span{
+    font-size: 12px;
+}
+
+.breadcrumbs a{
+    text-decoration: none;
+    color: ${(props) => props.theme.fontColor};
+}
+
 ::-webkit-scrollbar{
     width: 5px;
     background-color: ${props => props.theme.body};
@@ -58,35 +72,28 @@ section span{
 `;
 
 export const StyledSearched = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: ${(props) => props.theme.fontColor};
-
-    .breadcrumbs{
+    .searchedpage{
         display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-    .breadcrumbs span{
-        font-size: 12px;
-    }
-
-    .breadcrumbs a{
-        text-decoration: none;
+        min-height: 100vh;
+        flex-direction: column;
+        align-items: center;
         color: ${(props) => props.theme.fontColor};
     }
-
-
 `
 
 export const StyledCustomerService = styled.div`
+    .customerservice{
+        height: 100%;
+        min-height: 100vh;
+    }
 `;
 
 export const HomeStyled = styled.div`
 section{
-    width: 100%;
     display: flex;
+    height: 100%;
+    min-height: 100vh;
+    width: 100%;
     color: white;
     justify-content: center;
 }
@@ -538,11 +545,40 @@ export const StyledNavbar = styled.div`
         flex-direction: column;
         justify-content: space-between;
     }
-
+    
     .shoppingbag-container li .item-info-container .item-info{
         display: flex;
         flex-direction: column;
     }
+    
+    .shoppingbag-container .item-info-container .item-info .name-removeitem{
+        display: flex;
+        padding: 0;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .shoppingbag-container .item-info-container .item-info .name-removeitem span{
+        width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap
+    }
+
+    .shoppingbag-container .item-info-container .item-info .name-removeitem .removeitem{
+        display: flex;
+        border-radius: 20px;
+        align-items: center;
+    }
+
+    .shoppingbag-container .item-info-container .item-info .name-removeitem .removeitem svg{
+        height: 17px;
+        width: 17px;
+    }
+
+    .shoppingbag-container .item-info-container .item-info .name-removeitem .removeitem:hover{
+        background-color: ${(props) => props.theme.body};
+    }   
 
     .shoppingbag-container li .item-info-container .price{
         display: flex;
@@ -562,6 +598,10 @@ export const StyledNavbar = styled.div`
 
     @media screen and (max-width: 1024px){
         .botnav{
+            display: none;
+        }
+
+        .shoppingbag-onhover .shoppingbag-container{
             display: none;
         }
 
@@ -764,17 +804,18 @@ export const StyledItem = styled.div`
 `;
 
 export const StyledProducts = styled.div`
+    .products{
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
     a{
         text-decoration: none;
         font-size: 13px;
         color: ${(props) => props.theme.fontColor};
-    }
-
-    .products{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
     }
     
     span{
@@ -784,11 +825,6 @@ export const StyledProducts = styled.div`
     .main-container{
         display: flex;
         gap: 5px;
-    }
-
-    .breadcrumbs{
-        display: flex;  
-        justify-content: center;
     }
 
     .side-main-container{
@@ -1095,9 +1131,11 @@ export const StyledProducts = styled.div`
 `;
 
 export const StyledSingleProduct = styled.div`
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    .single-item{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
 
     span{
         font-size: 13px;
@@ -1367,5 +1405,145 @@ export const StyledSingleProduct = styled.div`
         .info-container{
             width: 100%;
         }
+    }
+`;
+
+export const StyledAbout = styled.div`
+    .about{
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+    }
+    
+    .content-container{
+        color: ${props => props.theme.fontColor};
+        font-size: 13px;
+    }
+
+    .about-content-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .introductory-content{
+        width: 80%;
+        text-align: justify;
+        font-size: 13px;
+    }
+
+    .introductory-content a{
+        color: ${props => props.theme.fontColor};
+    }
+
+    .about-content{
+        text-align: justify;
+        width: 80%;
+    }
+
+`;
+
+export const StyledFooter = styled.div`
+    footer{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        gap: 10px;
+        padding: 20px;
+        background-color: ${props => props.theme.body};
+    }
+
+    .menu-footer{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        gap: 30px;
+        font-size: 13px;
+    }
+
+    .menu-footer a{
+        color: ${props => props.theme.fontColor};
+        text-decoration: none;
+    }
+
+    .menu-footer a.active{
+        font-weight: bold;
+    }
+
+    .menu-footer .left-menu{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu-footer .left-menu .logo-container{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .menu-footer .left-menu .logo-container img{
+        position: absolute;
+        display: flex;
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+    }
+
+    .menu-footer .left-menu a:last-child{
+        width: 100%;
+        background-color: ${props => props.theme.fontColor};
+        color: ${props => props.theme.body};
+        padding: 2px;
+    }
+
+    .menu-footer .mid-menu{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu-footer .right-menu{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .label{
+        display: flex;
+        justify-content: center;
+        font-size: 13px;
+        color: ${props => props.theme.fontColor};
+    }
+
+    .socials{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .socials a{
+        display: flex;
+        gap: 5px;
+        color: ${props => props.theme.body};
+    }
+    
+    .socials svg{
+        padding: 1px;
+        height: 23px;
+        width: 23px;
+        background-color: ${props => props.theme.fontColor};
+        border-radius: 5px;
+    }
+`;
+
+export const StyledError = styled.div`
+    .error{
+        height: 100%;
+        min-height: 100vh;
     }
 `;

@@ -3,6 +3,7 @@ import { Link, NavLink, useParams } from "react-router-dom"
 import { ProductsContainer } from "../components/ProductsContainer";
 import {SideFilter} from "../components/SideFilter";
 import { StyledProducts } from "../theme";
+import Footer from "../components/Footer";
 
 export const Products = (props) => {
     const {usedata, haserror} = props;
@@ -69,7 +70,7 @@ export const Products = (props) => {
                 </div>
                 
             </section>
-                
+            <Footer />
         </StyledProducts>
     )
 }

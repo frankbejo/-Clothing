@@ -1,11 +1,5 @@
-import styled from "styled-components"
-
-const StyledError = styled.div`
-    section{
-        height: 1000px;
-        color: white;
-    }
-`;
+import { StyledError } from "../theme";
+import Footer from "../components/Footer";
 
 export const Error = () => {
     return(
@@ -13,6 +7,7 @@ export const Error = () => {
         <section className="error">
             <h2>404, page not found</h2>
         </section>
+        <Footer />
         </StyledError>
     )
 }

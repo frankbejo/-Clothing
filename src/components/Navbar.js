@@ -3,18 +3,18 @@ import {NavLink, Outlet, useParams} from 'react-router-dom';
 import logo1 from '../images/logo_2.webp';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
-import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack} from '@mui/icons-material';
+import { ShoppingBagOutlined, FavoriteBorder, LightMode, DarkMode, AccountCircleOutlined, Menu, Search, NavigateNext, ArrowBack, RemoveOutlined} from '@mui/icons-material';
 import { MenuList } from './MenuList';
 import { TopMenuSkeleton } from './TopMenuSkeleton';
 import {useSelector, useDispatch} from 'react-redux';
-import { setItems } from '../features/add-to-cart/addToCartSlice';
+import { setItems, removeItem } from '../features/add-to-cart/addToCartSlice';
 
 const Navbar = (props) => {
     // redux state
     const cart = useSelector((state) => state.cart.cart)
     const dispatch = useDispatch();
     const {usedata, haserror, fetchData} = props;
-    const {categoryLabel, shopby, viewby} = useParams()
+    const {categoryLabel, shopby} = useParams()
 
     let totalprice = 0;
     // const favorites = useSelector((state) => state.favorites.favorites)
@@ -47,6 +47,12 @@ const Navbar = (props) => {
             viewby: false
         }
     )
+
+    // remove item from cart
+    const RemoveItem = (index, e) => {
+        e.preventDefault()
+        dispatch(removeItem(index))
+    }
 
     // function for category, shopby and viewby close : side menu
     const CloseSideMenu = () => {
@@ -93,7 +99,7 @@ const Navbar = (props) => {
     // new arrival filtered
     const datenow = new Date()
     const filterednewarr = [];
-    usedata.filter(item => item.category === usecategory && new Date(item.created).getFullYear() === datenow.getFullYear() && new Date(item.created).getMonth() === datenow.getMonth())
+    usethisdata.filter(item => item.category === usecategory && new Date(item.created).getFullYear() === datenow.getFullYear() && new Date(item.created).getMonth() === datenow.getMonth())
         .map((item) => {
             if(!filterednewarr.includes(item.type)){
                 filterednewarr.push(item.type)
@@ -106,7 +112,7 @@ const Navbar = (props) => {
     
     // trending filtered
     const filteredtrending = [];
-    usedata.filter(item => item.category === usecategory && item.ishot === true)
+    usethisdata.filter(item => item.category === usecategory && item.ishot === true)
         .map(item => {
             if(!filteredtrending.includes(item.type)){
                 filteredtrending.push(item.type)
@@ -119,7 +125,7 @@ const Navbar = (props) => {
 
     // all types filtered
     const filteredbyshop = [];
-    usedata.filter(item => item.category === usecategory)
+    usethisdata.filter(item => item.category === usecategory)
         .map(item => {
             if(!filteredbyshop.includes(item.type)){
                 filteredbyshop.push(item.type)
@@ -146,7 +152,7 @@ const Navbar = (props) => {
     useEffect(() => {
         setthisdata(usedata)
     }, [usedata])
-    
+
     useEffect(() => {
         fetchData()
         if(!window.localStorage.getItem("cart")){
@@ -156,6 +162,10 @@ const Navbar = (props) => {
         }
     },[])
 
+    useEffect(() => {
+        window.localStorage.setItem("cart", JSON.stringify(cart))
+    }, [cart])
+    
     return(
         <div>
             <ThemeProvider theme={theme ? lighttheme : darktheme}>
@@ -335,8 +345,6 @@ const Navbar = (props) => {
                                     ({cart.length})
                                     <div className="shoppingbag-onhover">
                                         <div className="shoppingbag-container">
-                                            <span></span>
-                                            
                                             {
                                                 cart.length === 0 ? (
                                                     <div className="emptybag">
@@ -347,26 +355,31 @@ const Navbar = (props) => {
                                                     <>
                                                     <ul>
                                                         {
-                                                        cart.map(item => {
+                                                        cart.map((item, index) => {
                                                         totalprice += item.price;
                                                         return(
-                                                            <NavLink to={`/products/${item.category}/all/viewall/${item._id}/${item.itemname}`}>
+                                                            <NavLink to={`/products/${item.category}/all/viewall/${item._id}/${item.itemname}`} key={`${item.itemname}${index}cart`}>
                                                                 <li>
-                                                                <div className="image-container">
-                                                                    <img src={item.product_image} alt="" />
-                                                                </div>
-                                                                <div className="item-info-container">
-                                                                    <div className="item-info">
-                                                                        <span><b>{item.itemname}</b></span>
-                                                                        <span>{item.fit}</span>
-                                                                        <span>Size: {item.sizes[0].size}</span>
+                                                                    <div className="image-container">
+                                                                        <img src={item.product_image} alt="" />
                                                                     </div>
-                                                                    <div className="price">
-                                                                        <span>PHP{item.price}</span>
-                                                                        <span>{item.price}.00</span>
+                                                                    <div className="item-info-container">
+                                                                        <div className="item-info">
+                                                                            <div className="name-removeitem">
+                                                                                <span><b>{item.itemname}</b></span>
+                                                                                <div className="removeitem" onClick={(e) => RemoveItem(index, e)}>
+                                                                                    <RemoveOutlined />
+                                                                                </div>
+                                                                            </div>
+                                                                            <span>{item.fit}</span>
+                                                                            <span>Size: {item.sizes[0].size}</span>
+                                                                        </div>
+                                                                        <div className="price">
+                                                                            <span>PHP{item.price}</span>
+                                                                            <span>{item.price}.00</span>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </li>
+                                                                </li>
                                                             </NavLink>
                                                         )
                                                     })
