@@ -1557,6 +1557,44 @@ export const StyledError = styled.div`
 
 export const StyledShoppingBag = styled.div`
     section.myshoppingbag{
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        color: ${props => props.theme.fontColor};
+    }
+
+    /* main content container */
+    .shoppingbag-content-container{
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* shopping bag */
+    .shoppingbag-container{
+        width: 60%;
+    }
+
+    .shoppingbag-container ul{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        list-style: none;
+    }
+
+    .shoppingbag-container li{
+        
+        height: 170px;
+        padding: 10px;
+        border: 1px solid ${props => props.theme.fontColor};
+    }
+
+
+    /* payment container */
+    .payment-info-container{
+        width: 40%;
+        height: 100%;
     }
 `;

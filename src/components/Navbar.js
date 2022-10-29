@@ -19,7 +19,6 @@ const Navbar = (props) => {
     const cart = useSelector((state) => state.cart.cart)
     const dispatch = useDispatch();
     const {usedata, haserror, fetchData} = props;
-    
 
     let totalprice = 0;
     // const favorites = useSelector((state) => state.favorites.favorites)
@@ -182,6 +181,7 @@ const Navbar = (props) => {
     },[])
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         setIsShoppingBag(false)
     },[location])
 
