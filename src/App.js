@@ -10,6 +10,7 @@ import About from "./pages/About";
 import { SearchedPage } from "./pages/SearchedPage";
 import {store} from './store/store';
 import {Provider} from 'react-redux';
+import {Shoppingbag} from './pages/Shoppingbag';
 
 function App() {
   const [usedata, setusedata] = useState([]);
@@ -36,6 +37,7 @@ function App() {
           <Route path="search" element={<SearchedPage />} />
           <Route path="customerservice" element={<CustomerService />} />
           <Route path="about" element={<About />} />
+          <Route path="myshoppingbag" element={<Shoppingbag/>} />
           <Route path="products/:categoryLabel/:shopby/:viewby" element={<Products usedata={usedata} haserror={haserror}/>} />
           <Route path="products/:categoryLabel/:shopby/:viewby/:itemid/:itemname" element={<SingleProduct usedata={usedata}/>} />
           <Route path="*" element={<Error />}/>

@@ -487,6 +487,11 @@ export const StyledNavbar = styled.div`
         display: none;
     }
 
+    #shoppingbag a{
+        display: flex;
+        align-items: center;
+    }
+
     #shoppingbag .shoppingbag-onhover{
         display: none;
         right: 20px;
@@ -587,7 +592,7 @@ export const StyledNavbar = styled.div`
         border-bottom: 1px solid ${(props) => props.theme.fontColor};
     }
 
-    #shoppingbag:hover .shoppingbag-onhover{
+    #shoppingbag .shoppingbag-onhover.active{
         display: flex;
     }
 
@@ -1546,6 +1551,12 @@ export const StyledFooter = styled.div`
 export const StyledError = styled.div`
     .error{
         height: 100%;
+        min-height: 100vh;
+    }
+`;
+
+export const StyledShoppingBag = styled.div`
+    section.myshoppingbag{
         min-height: 100vh;
     }
 `;

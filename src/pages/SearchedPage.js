@@ -3,8 +3,9 @@ import { Link, useSearchParams } from "react-router-dom"
 import Footer from "../components/Footer";
 
 export const SearchedPage = () => {
-    const [ searchParams ] = useSearchParams();
-    const searchText = searchParams.get("search");
+    const [searchParams] = useSearchParams();
+    const searchedText = searchParams.get("search")
+
 
     return(
         <StyledSearched>
@@ -12,7 +13,7 @@ export const SearchedPage = () => {
                 <div className="breadcrumbs">
                     <span><Link to="/">Home</Link> / <b>search</b></span>
                 </div>
-                <span>Showing results for <b>"{searchText}"</b></span> 
+                <span>Showing results for <b>"{searchedText}"</b></span> 
             </section>
             <Footer />
         </StyledSearched>

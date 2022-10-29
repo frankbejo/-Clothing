@@ -1,5 +1,5 @@
 import React, {useState, useLayoutEffect, useEffect} from 'react';
-import {NavLink, Outlet, useParams} from 'react-router-dom';
+import {NavLink, Outlet, useParams, useNavigate, createSearchParams, useLocation} from 'react-router-dom';
 import logo1 from '../images/logo_2.webp';
 import { ThemeProvider } from 'styled-components';
 import { lighttheme, darktheme, Globalstyles, StyledNavbar } from '../theme';
@@ -10,11 +10,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import { setItems, removeItem } from '../features/add-to-cart/addToCartSlice';
 
 const Navbar = (props) => {
+    let location = useLocation();
+    const {categoryLabel, shopby} = useParams()
+    
+    const navigate = useNavigate();
+
     // redux state
     const cart = useSelector((state) => state.cart.cart)
     const dispatch = useDispatch();
     const {usedata, haserror, fetchData} = props;
-    const {categoryLabel, shopby} = useParams()
+    
 
     let totalprice = 0;
     // const favorites = useSelector((state) => state.favorites.favorites)
@@ -29,6 +34,9 @@ const Navbar = (props) => {
 
     // droponhover state / animation state
     const [droponhover, setdroponhover ] = useState(false)
+
+    // show on hover shoppingbag
+    const [isShoppingBag, setIsShoppingBag] = useState(false)
 
     // category state for navbar
     const [usecategory, setcategory] = useState("");
@@ -136,6 +144,17 @@ const Navbar = (props) => {
             return{}
         })
 
+    // search
+    const OnSearchSubmit = (e) => {
+        e.preventDefault();
+        navigate({
+            pathname: "search",
+            search: createSearchParams({
+                search: e.target.search.value
+            }).toString()
+        });
+    }
+
     useLayoutEffect(() => {
         if(window.localStorage.getItem("theme") === null){
             window.localStorage.setItem("theme", true)
@@ -161,6 +180,10 @@ const Navbar = (props) => {
             dispatch(setItems(JSON.parse(window.localStorage.getItem("cart"))))
         }
     },[])
+
+    useEffect(() => {
+        setIsShoppingBag(false)
+    },[location])
 
     useEffect(() => {
         window.localStorage.setItem("cart", JSON.stringify(cart))
@@ -329,7 +352,7 @@ const Navbar = (props) => {
                                     <NavLink to='/findastore'>Find a store</NavLink>
                                     <div className="search">
                                         <Search />
-                                        <form action='/search'>
+                                        <form action='' onSubmit={OnSearchSubmit}>
                                             <input type="search" name="search" id="search" placeholder='Search' autoComplete='off' />
                                         </form>
                                     </div>
@@ -339,11 +362,22 @@ const Navbar = (props) => {
                                     <FavoriteBorder /> 
                                     <span>Favorites</span> 
                                 </div>
-                                <div id="shoppingbag">
-                                    <ShoppingBagOutlined />
-                                    <span>Shopping bag</span> 
+                                <div id="shoppingbag" 
+                                onMouseEnter={() => {
+                                    if(location.pathname === "/myshoppingbag"){
+                                        return
+                                    }else{
+                                        setIsShoppingBag(true)
+                                    }
+                                }}
+
+                                onMouseLeave={() => setIsShoppingBag(false)}>
+                                    <NavLink to="/myshoppingbag">
+                                        <ShoppingBagOutlined />
+                                        <span>Shopping bag</span> 
+                                    </NavLink>
                                     ({cart.length})
-                                    <div className="shoppingbag-onhover">
+                                    <div className={`shoppingbag-onhover ${isShoppingBag ? "active": ""}`}>
                                         <div className="shoppingbag-container">
                                             {
                                                 cart.length === 0 ? (
