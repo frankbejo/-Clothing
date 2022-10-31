@@ -921,7 +921,6 @@ export const StyledProducts = styled.div`
 
     .products-container{
         display: grid;
-        grid-template-columns: repeat(15, 1fr);
         width: 100%;
         height: 100%;
         grid-gap: 5px;
@@ -1560,9 +1559,10 @@ export const StyledShoppingBag = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         width: 100%;
+        min-height: 100vh;
         color: ${props => props.theme.fontColor};
+        font-size: 14px;
     }
 
     /* main content container */
@@ -1584,17 +1584,46 @@ export const StyledShoppingBag = styled.div`
         list-style: none;
     }
 
-    .shoppingbag-container li{
-        
+    .shoppingbag-container ul a{
+        text-decoration: none;
         height: 170px;
         padding: 10px;
-        border: 1px solid ${props => props.theme.fontColor};
+        background-color: ${props => props.theme.itembg}60;
     }
 
+    .shoppingbag-container ul a li{
+        display: flex;
+        gap: 10px;
+    }
+
+    /* image container */
+    .image-container{
+        position: relative;
+        width: 150px;
+        height: 150px;
+        aspect-ratio: 4/4;
+        border: 1px solid ${props => props.theme.fontColor};
+    }
+    .image-container img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
     /* payment container */
     .payment-info-container{
         width: 40%;
         height: 100%;
+    }
+`;
+
+export const StyledAdmin = styled.div`
+    section.admin{
+        min-height: 100vh;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
     }
 `;

@@ -27,7 +27,16 @@ export const Shoppingbag = () => {
                                     {
                                         cartdata.map(item => {
                                             return <>
-                                                <li><span>{item.itemname}</span></li>
+                                            <NavLink to={`/products/${item.category}/all/viewall/${item._id}/${item.itemname}`}>
+                                                <li>
+                                                    <div className="image-container">
+                                                        <img src={item.product_image} alt="" />
+                                                    </div>
+                                                    <div className="info-container">
+                                                        <span><b>{item.itemname}</b></span>
+                                                    </div>
+                                                </li>
+                                            </NavLink>
                                             </>
                                         })
                                     }

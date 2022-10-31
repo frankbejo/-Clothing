@@ -11,6 +11,7 @@ import { SearchedPage } from "./pages/SearchedPage";
 import {store} from './store/store';
 import {Provider} from 'react-redux';
 import {Shoppingbag} from './pages/Shoppingbag';
+import Admin from "./pages/Admin";
 
 function App() {
   const [usedata, setusedata] = useState([]);
@@ -18,7 +19,7 @@ function App() {
 
   const fetchData = async () => {
     try{
-      const res = await fetch("https://test-server-side-api.herokuapp.com/products")
+      const res = await fetch("https://server-node-rest-api-production.up.railway.app/products")
       const data = await res.json()
       setusedata(data)
     }
@@ -42,6 +43,7 @@ function App() {
           <Route path="products/:categoryLabel/:shopby/:viewby/:itemid/:itemname" element={<SingleProduct usedata={usedata}/>} />
           <Route path="*" element={<Error />}/>
         </Route>
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Provider>
     </BrowserRouter>
