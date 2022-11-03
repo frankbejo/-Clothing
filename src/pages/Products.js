@@ -5,7 +5,7 @@ import {SideFilter} from "../components/SideFilter";
 import { StyledProducts } from "../theme";
 import Footer from "../components/Footer";
 
-export const Products = (props) => {
+const Products = (props) => {
     const {usedata, haserror} = props;
     const [isError, setIsError] = useState(false);
     const [passeddata, setpasseddata] = useState([]);
@@ -74,3 +74,5 @@ export const Products = (props) => {
         </StyledProducts>
     )
 }
+
+export default Products;

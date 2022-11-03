@@ -18,6 +18,31 @@ export const lighttheme = {
     itembg: "#F0F0F0"
 };
 
+export const StyledSpinner = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .spinner{
+        content: " ";
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: ${props => props.theme.body};
+    }
+
+    .spinner ::after{
+        content: " ";
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: ${props => props.theme.itembg};
+        z-index: 100;
+    }
+`;
+
 export const Globalstyles = createGlobalStyle`
 *{
     margin: 0;

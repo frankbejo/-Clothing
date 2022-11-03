@@ -1,7 +1,7 @@
 import { StyledError } from "../theme";
 import Footer from "../components/Footer";
 
-export const Error = () => {
+const Error = () => {
     return(
         <StyledError>
         <section className="error">
@@ -11,3 +11,5 @@ export const Error = () => {
         </StyledError>
     )
 }
+
+export default Error;

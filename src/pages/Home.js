@@ -4,7 +4,7 @@ import img1 from '../images/img1.jpg';
 import img3 from '../images/img3.jpg';
 import Footer from '../components/Footer';
 
-export const Home = () => {
+const Home = () => {
 
     
     return(
@@ -31,3 +31,5 @@ export const Home = () => {
         </HomeStyled>
     )
 }
+
+export default Home;

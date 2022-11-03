@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { StyledShoppingBag } from '../theme'
 import { useSelector } from 'react-redux'
 
-export const Shoppingbag = () => {
+const Shoppingbag = () => {
     const cartdata = useSelector(state => state.cart.cart)
     return(
         <>
@@ -57,3 +57,5 @@ export const Shoppingbag = () => {
         </>
     )
 }
+
+export default Shoppingbag;

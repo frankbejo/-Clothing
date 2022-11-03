@@ -6,7 +6,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addItem} from '../features/add-to-cart/addToCartSlice';
 import Footer from "../components/Footer";
 
-export const SingleProduct = (props) => {
+const SingleProduct = (props) => {
 const params  = useParams();    
 const {itemid} = params;  
 const {usedata} = props;
@@ -147,3 +147,5 @@ return(
         </StyledSingleProduct>
     )
 }
+
+export default SingleProduct;

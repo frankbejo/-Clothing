@@ -1,7 +1,7 @@
 import {StyledCustomerService} from '../theme';
 import Footer from '../components/Footer';
 
-export const CustomerService = () => {
+const CustomerService = () => {
     return(
         <StyledCustomerService>
         <section className="customerservice">
@@ -11,3 +11,5 @@ export const CustomerService = () => {
         </StyledCustomerService>
     )
 }
+
+export default CustomerService;

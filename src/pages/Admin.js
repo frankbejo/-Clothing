@@ -28,7 +28,7 @@ const Admin = () => {
             },
             body: JSON.stringify(input)
         }
-        fetch("https://server-node-rest-api-production.up.railway.app/products", data).then(res => {
+        fetch("http://localhost:5000/products", data).then(res => {
             console.log(res)
         })
 

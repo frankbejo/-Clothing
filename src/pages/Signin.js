@@ -5,3 +5,5 @@ const Signin = () => {
         </section>
     )
 }
+
+export default Signin;
