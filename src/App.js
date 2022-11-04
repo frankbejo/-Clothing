@@ -1,8 +1,7 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CustomerService from "./pages/CustomerService";
-import Products from './pages/Products';
 import SingleProduct from "./pages/SingelProduct";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
@@ -11,7 +10,8 @@ import {store} from './store/store';
 import {Provider} from 'react-redux';
 import Shoppingbag from './pages/Shoppingbag';
 import Admin from "./pages/Admin";
-import Error from './pages/Error';
+import Products from "./pages/Products";
+import Error from "./pages/Error";
 
 function App() {
   const [usedata, setusedata] = useState([]);
@@ -19,7 +19,7 @@ function App() {
 
   const fetchData = async () => {
     try{
-      const res = await fetch("http://localhost:5000/products")
+      const res = await fetch("https://server-node-rest-api-production.up.railway.app/products")
       const data = await res.json()
       setusedata(data)
     }
@@ -27,7 +27,7 @@ function App() {
       sethaserror(true)
       setusedata([])
     }
-  } 
+  }
 
   return (
     <BrowserRouter>
@@ -47,7 +47,6 @@ function App() {
       </Routes>
     </Provider>
     </BrowserRouter>
-    
   );
 }
 

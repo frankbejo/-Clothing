@@ -966,8 +966,8 @@ export const StyledProducts = styled.div`
     .loading-spinner::before{
         content: "";
         position: absolute;
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         background-color: ${props => props.theme.fontColor};
     }
@@ -975,8 +975,8 @@ export const StyledProducts = styled.div`
     .loading-spinner::after{
         content: "";
         position: absolute;
-        width: 35px;
-        height: 35px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         background-color: ${props => props.theme.body};
     }
@@ -985,7 +985,7 @@ export const StyledProducts = styled.div`
         content: "";
         position: absolute;
         width: 7px;
-        height: 40px;
+        height: 60px;
         background-image: linear-gradient(to bottom, transparent, ${props => props.theme.body} );
         animation: rotatehand 1000ms normal infinite;
 

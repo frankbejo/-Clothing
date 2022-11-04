@@ -178,7 +178,7 @@ const Navbar = (props) => {
         }else{
             dispatch(setItems(JSON.parse(window.localStorage.getItem("cart"))))
         }
-    },[])
+    },[ ])
 
     useEffect(() => {
         window.scrollTo(0, 0)
