@@ -12,6 +12,7 @@ import Shoppingbag from './pages/Shoppingbag';
 import Admin from "./pages/Admin";
 import Products from "./pages/Products";
 import Error from "./pages/Error";
+import './App.css';
 
 function App() {
   const [usedata, setusedata] = useState([]);
