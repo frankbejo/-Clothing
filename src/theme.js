@@ -44,22 +44,10 @@ export const StyledSpinner = styled.div`
 `;
 
 export const Globalstyles = createGlobalStyle`
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 body{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
     background-color: ${(props) => props.theme.body};
-    font-family: 'Inter', serif;
-}
-
-section{
-    padding: 20px;
 }
 
 section h2{
@@ -68,15 +56,6 @@ section h2{
 
 section span{
     color: ${(props) => props.theme.fontColor};
-}
-
-.breadcrumbs{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-.breadcrumbs span{
-    font-size: 12px;
 }
 
 .breadcrumbs a{
@@ -1504,7 +1483,7 @@ export const StyledFooter = styled.div`
     }
 
     .menu-footer a.active{
-        font-weight: bold;
+        font-weight: 600;
     }
 
     .menu-footer .left-menu{
