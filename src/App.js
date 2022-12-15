@@ -20,7 +20,7 @@ function App() {
 
   const fetchData = async () => {
     try{
-      const res = await fetch("https://server-node-rest-api-production.up.railway.app/products")
+      const res = await fetch("https://uninterested-carpenter-production.up.railway.app/products")
       const data = await res.json()
       setusedata(data)
     }

@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import FilterThis from "./FilterThis";
 import { Item } from './Item';
 import {Search} from '@mui/icons-material';
-// import axios from 'axios';
-import {products} from '../data'
+import axios from 'axios';
+// import {products} from '../data'
 
 export const Products = () => {
     const [passeddata, setpasseddata] = useState([]);
@@ -13,18 +13,14 @@ export const Products = () => {
     const { categoryLabel, shopby, viewby } = useParams();
     const searchinput = useRef(null);
 
-    // const GetThisData = async () => {
-    //     await axios.get("http://localhost:3000/products")
-    //     .then(res => {
-    //         setpasseddata(res.data)
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // }
-
-    const GetThisData = () => {
-        setpasseddata(products)
+    const GetThisData = async () => {
+        await axios.get("https://uninterested-carpenter-production.up.railway.app/products")
+        .then(res => {
+            setpasseddata(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     // filter data by categories
@@ -81,7 +77,7 @@ export const Products = () => {
                             </div>
                             
                             <div className="filter-function">
-                                <FilterThis menu="Sort by"/>
+                                <FilterThis menu="Sort by" />
                                 <FilterThis menu="Material" />
                                 <FilterThis menu="Fit" />
 
