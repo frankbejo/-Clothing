@@ -29,7 +29,7 @@ const Admin = () => {
             body: JSON.stringify(input)
         }
         
-        fetch("http://localhost:5000/products", data).then(res => {
+        fetch("https://uninterested-carpenter-production.up.railway.app/products", data).then(res => {
             console.log(res)
         })
 
