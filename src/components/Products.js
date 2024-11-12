@@ -14,7 +14,7 @@ export const Products = () => {
     const searchinput = useRef(null);
 
     const GetThisData = async () => {
-        await axios.get("https://uninterested-carpenter-production.up.railway.app/products")
+        await axios.get(`${process.env.SERVER_URL}/products`)
         .then(res => {
             setpasseddata(res.data)
         })
